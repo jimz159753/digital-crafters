@@ -1,0 +1,8 @@
+.about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    margin: 100px 0;
+    position: relative;
+}

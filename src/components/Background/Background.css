@@ -1,0 +1,9 @@
+.background-office {
+    background: url('../../assets/images/office.png');
+    background-size: cover;
+    height: 58vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

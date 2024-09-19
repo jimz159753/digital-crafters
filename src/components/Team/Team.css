@@ -1,0 +1,7 @@
+.team {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 100px 0;
+    position: relative;
+}

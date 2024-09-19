@@ -7,6 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      'Quattrocento-Bold': ['Quattrocento-Bold'],
+      'Questrial-Regular': ['Questrial-Regular'],
+      'QuattrocentoSans-Bold': ['QuattrocentoSans-Bold'],
+      'QuattrocentoSans-Regular': ['QuattrocentoSans-Regular']
+    },
     extend: {
       colors: {
         background: "var(--background)",

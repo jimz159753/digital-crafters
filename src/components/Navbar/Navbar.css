@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+    color: white;
+    padding: 35px 50px;
+    position: absolute;
+    width: 100%;
+}
+
+.tabs {
+    font-style: normal;
+    font-size: 20px;
+    gap: 10px;
+    width: 35%;
+}
