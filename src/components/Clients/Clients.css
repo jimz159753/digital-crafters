@@ -1,7 +1,28 @@
 .clients {
+    margin: 400px 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slick-slider {
+    width: 320px;
+}
+
+.slick-dots {
+    height: 20px;
+}
+
+.slick-dots li button:before {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 100px 0;
-    position: relative;
+    color: #3C78FF !important;
+    font-size: 12px !important;
+}
+
+.slick-dots li.slick-active button:before {
+    color: white !important;
+    border: 3px solid #3C78FF !important;
+    border-radius: 100% !important;
 }

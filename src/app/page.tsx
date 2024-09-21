@@ -8,6 +8,7 @@ import { Projects } from "@/components/Projects";
 import { Clients } from "@/components/Clients";
 import { Team } from "@/components/Team";
 import { Technologies } from "@/components/Technologies";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <Team />
         <Technologies />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import React from 'react'
 import './Projects.css'
+import Image from 'next/image'
+import realsync from '../../assets/images/realsync.png'
+import ergeon from '../../assets/images/ergeon.png'
+import hca from '../../assets/images/hca.png'
 
 export const Projects = () => {
     return (
@@ -10,9 +14,9 @@ export const Projects = () => {
                     imprentas y archivos de texto.</p>
             </div>
             <div className='flex gap-10'>
-                <div>Project 1</div>
-                <div>Project 2</div>
-                <div>Project 3</div>
+                <Image className='w-[460px] h-[460px] object-cover rounded-[20px] shadow-[0px_0px_15px_0px_rgba(0,0,0,0.5)]' src={realsync} alt='realsynch' />
+                <Image className='w-[460px] h-[460px] object-cover rounded-[20px] shadow-[0px_0px_15px_0px_rgba(0,0,0,0.5)]' src={ergeon} alt='ergeon' />
+                <Image className='w-[460px] h-[460px] object-cover rounded-[20px] shadow-[0px_0px_15px_0px_rgba(0,0,0,0.5)]' src={hca} alt='hca' />
             </div>
             <button className='btn-more'>VIEW MORE</button>
         </div>
