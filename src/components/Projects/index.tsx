@@ -8,9 +8,9 @@ import hca from '../../assets/images/hca.png'
 export const Projects = () => {
     return (
         <div className='projects'>
-            <div className='text-center'>
+            <div className='text-center flex flex-col items-center'>
                 <h1 className='text-[50px]'>Our latest projects</h1>
-                <p className='font-Questrial text-[28px] text-[#000000] text-opacity-50'>Lorem Ipsum es simplemente el texto de relleno de las
+                <p className='font-Questrial text-[28px] text-[#000000] text-opacity-50 w-[80%]'>Lorem Ipsum es simplemente el texto de relleno de las
                     imprentas y archivos de texto.</p>
             </div>
             <div className='flex gap-10'>

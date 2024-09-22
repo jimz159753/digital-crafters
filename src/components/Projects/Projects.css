@@ -3,14 +3,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 40px;
-    margin: 400px 0;
+    gap: 100px;
     position: relative;
 }
 
 .btn-more {
     border: 2px solid #3C78FF;
     color: #3C78FF;
-    padding: 15px;
-    font-weight: 700;
+    padding: 16px;
+    font-weight: 900;
+    font-size: larger;
 }

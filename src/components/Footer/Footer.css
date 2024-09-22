@@ -1,0 +1,7 @@
+.footer {
+    @apply h-[500px] p-40 mt-[200px] bg-[#101010] opacity-[97%] flex flex-row flex-wrap justify-between;
+}
+
+.text-space {
+    @apply flex flex-col gap-5 text-white;
+}

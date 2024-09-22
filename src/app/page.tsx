@@ -15,9 +15,9 @@ export default function Home() {
     <div>
       <Navbar />
       <Background />
-      <div className="mx-40">
+      <div className="mx-40 flex flex-col gap-[320px]">
         <About />
-        <Image className="absolute left-0" src={poligons} alt='poligons' />
+        <Image className="absolute left-0 top-[113%]" src={poligons} alt='poligons' />
         <Services />
         <Projects />
         <Clients />

@@ -10,7 +10,7 @@ import customer from '../../assets/images/customer.png'
 export const Services = () => {
     return (
         <div className='services'>
-            <div className='flex flex-wrap gap-10 text-[28px] w-1/2 text-opacity-50'>
+            <div className='flex flex-wrap gap-6 text-[28px] basis-[55%] text-opacity-50'>
                 <div className='left-card'>
                     <Image src={development} alt='development' />
                     <p>Web Development</p>
@@ -28,7 +28,7 @@ export const Services = () => {
                     <p>Customer Service</p>
                 </div>
             </div>
-            <div className='flex flex-col relative w-[45%] gap-5'>
+            <div className='flex flex-col relative basis-[45%] gap-5'>
                 <h1 className='text-[50px]'>Our services</h1>
                 <p className='font-Questrial text-[28px] text-[#000000] text-opacity-50'>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar.</p>
             </div>
