@@ -1,7 +1,5 @@
 import { Background } from "@/components/Background";
 import { Navbar } from "@/components/Navbar";
-import Image from "next/image";
-import poligons from '../assets/images/poligons.png'
 import { About } from "@/components/About";
 import { Services } from "@/components/Services";
 import { Projects } from "@/components/Projects";
@@ -15,14 +13,15 @@ export default function Home() {
     <div>
       <Navbar />
       <Background />
-      <div className="mx-40 flex flex-col gap-[320px] tablet:gap-40">
-        <About />
-        <Image className="absolute left-0 top-[110%] w-full tablet:hidden" src={poligons} alt='poligons' />
-        <Services />
-        <Projects />
-        <Clients />
-        <Team />
-        <Technologies />
+      <div className="back-poligons">
+        <div className="mx-40 flex flex-col gap-[320px] relative">
+          <About />
+          <Services />
+          <Projects />
+          <Clients />
+          <Team />
+          <Technologies />
+        </div>
       </div>
       <Footer />
     </div>

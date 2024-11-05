@@ -7,3 +7,20 @@
     text-wrap: balance;
   }
 }
+
+.back-poligons {
+  position: relative;
+}
+
+.back-poligons::after {
+  content: ' ';
+    display: block;
+    position: absolute;
+    margin-top: 24%;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+    background-size: auto;
+    background: url('../assets/images/poligons.png') no-repeat;
+}
