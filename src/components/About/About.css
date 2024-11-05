@@ -1,7 +1,3 @@
 .about {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 100px;
-    position: relative;
+    @apply desktop:flex-nowrap desktop:flex-row desktop:justify-between items-center gap-[100px] relative;
 }

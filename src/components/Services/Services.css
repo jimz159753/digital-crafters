@@ -1,11 +1,8 @@
 .services {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+    @apply desktop:flex desktop:flex-nowrap justify-between items-center desktop:flex-row relative tablet:flex tablet:flex-wrap tablet:justify-center tablet:flex-col-reverse tablet:gap-[100px];
 }
 
-.left-card {
+.card {
     background-color: white;
     flex-basis: 45%;
     display: flex;
@@ -14,17 +11,4 @@
     gap: 20px;
     padding: 100px 0;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
-    border-radius: 100px 0 100px 0;
-}
-
-.right-card {
-    background-color: white;
-    flex-basis: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 100px 0;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
-    border-radius: 0 100px 0 100px;
 }

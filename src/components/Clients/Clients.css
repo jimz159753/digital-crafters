@@ -1,7 +1,5 @@
 .clients {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+    @apply relative desktop:flex desktop:flex-nowrap desktop:flex-row justify-between tablet:flex tablet:flex-wrap tablet:flex-col-reverse tablet:items-center tablet:gap-[100px];
 }
 
 .slick-slider {
