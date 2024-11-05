@@ -10,7 +10,7 @@ import customer from '../../assets/images/customer.png'
 export const Services = () => {
     return (
         <div className='services'>
-            <div className='flex flex-wrap gap-6 text-[28px] basis-[55%] text-opacity-50'>
+            <div className='flex flex-wrap desktop:flex-row laptop:flex-row tablet:flex-col gap-6 text-[28px] basis-[55%] text-opacity-50'>
                 <div className='card rounded-br-[100px] rounded-tl-[100px]'>
                     <Image src={development} alt='development' />
                     <p>Web Development</p>

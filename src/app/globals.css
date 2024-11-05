@@ -24,3 +24,9 @@
     background-size: auto;
     background: url('../assets/images/poligons.png') no-repeat;
 }
+
+@media (max-width: 800px) {
+  .back-poligons::after {
+    background: none;
+  }
+}
