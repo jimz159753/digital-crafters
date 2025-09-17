@@ -29,10 +29,11 @@ export default function Home() {
 
         <main className="relative z-10 flex flex-col h-full">
           <div className="flex-1 flex items-center justify-center px-8">
-            <div className="w-full max-w-6xl h-[60vh] flex items-center justify-center">
+            <div className="w-full max-w-6xl h-[60vh] flex items-center justify-center pointer-events-none">
               <Spline
                 scene="https://prod.spline.design/Pjd673OcDqi3LUrg/scene.splinecode"
-                className="w-full h-full"
+                className="w-full h-full pointer-events-none"
+                style={{ pointerEvents: 'none' }}
               />
             </div>
           </div>
