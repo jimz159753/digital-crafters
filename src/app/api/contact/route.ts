@@ -1,7 +1,15 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend with API key validation
+const resendApiKey = process.env.RESEND_API_KEY;
+if (!resendApiKey) {
+  console.warn(
+    "RESEND_API_KEY environment variable is not set. Email functionality will be disabled."
+  );
+}
+
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,9 +18,25 @@ export async function POST(request: NextRequest) {
 
     if (!captcha) {
       return NextResponse.json(
-        { error: 'Please verify you are not a robot' },
+        { error: "Please verify you are not a robot" },
         { status: 400 }
       );
+    }
+
+    // Check if Resend is properly configured
+    if (!resend) {
+      console.log("Email service not configured. Form submission received:", {
+        name,
+        email,
+        company,
+        field,
+        description: description.substring(0, 100) + "...",
+      });
+
+      return NextResponse.json({
+        success: true,
+        message: "Form submitted successfully (email service not configured)",
+      });
     }
 
     const emailHtml = `
@@ -39,8 +63,8 @@ export async function POST(request: NextRequest) {
     `;
 
     const data = await resend.emails.send({
-      from: 'Digital Crafters <noreply@digitalcrafters.dev>',
-      to: ['gtzgileta@gmail.com', 'luisjc140992@gmail.com'],
+      from: "Digital Crafters <noreply@digitalcrafters.dev>",
+      to: ["gtzgileta@gmail.com", "luisjc140992@gmail.com"],
       subject: `New Contact Form Submission from ${name} (${company})`,
       html: emailHtml,
       replyTo: email,
@@ -58,7 +82,9 @@ export async function POST(request: NextRequest) {
         <h3 style="color: #333; margin-top: 0;">Your Submission Summary</h3>
         <p><strong>Company:</strong> ${company}</p>
         <p><strong>Industry:</strong> ${field}</p>
-        <p><strong>Project:</strong> ${description.substring(0, 100)}${description.length > 100 ? '...' : ''}</p>
+        <p><strong>Project:</strong> ${description.substring(0, 100)}${
+      description.length > 100 ? "..." : ""
+    }</p>
       </div>
       
       <p>In the meantime, feel free to check out our recent work and learn more about our services on our website.</p>
@@ -73,17 +99,17 @@ export async function POST(request: NextRequest) {
     `;
 
     await resend.emails.send({
-      from: 'Digital Crafters <noreply@digitalcrafters.dev>',
+      from: "Digital Crafters <noreply@digitalcrafters.dev>",
       to: [email],
-      subject: 'Thank you for contacting Digital Crafters',
+      subject: "Thank you for contacting Digital Crafters",
       html: confirmationEmailHtml,
     });
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      { error: "Failed to send email" },
       { status: 500 }
     );
   }

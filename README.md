@@ -1,20 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Digital Crafters
+
+This is a [Next.js](https://nextjs.org) project for Digital Crafters, a modern web development agency showcasing their portfolio and services.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18 or later
+- npm, yarn, pnpm, or bun
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+3. Set up environment variables (optional for email functionality):
+   Create a `.env.local` file in the root directory:
+
+   ```bash
+   # Resend API Key for email functionality
+   # Get your API key from https://resend.com/api-keys
+   RESEND_API_KEY=your_resend_api_key_here
+
+   # Email configuration
+   FROM_EMAIL=noreply@digitalcrafters.dev
+   TO_EMAILS=gtzgileta@gmail.com,luisjc140992@gmail.com
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
