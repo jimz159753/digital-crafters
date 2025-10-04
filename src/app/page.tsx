@@ -37,36 +37,38 @@ const portfolioProjects = [
   {
     id: 1,
     title: "Realsynch",
-    description: "your personal business advisor and data powerhouse. Seamlessly integrating, aggregating, and analyzing your business data, Realsynch provides a crystal-clear view of where your business stands and where you should focus your efforts.\n" +
-        "\n" +
-        "With a user-friendly dashboard designed to enhance sales and productivity, you'll make confident, data-driven decisions that drive success for both you and your agents—all without needing advanced computer skills.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
-    category: "AI",
-    features: ["Machine Learning Integration", "Real-time Analytics", "Custom Visualizations", "Automated Reporting"]
+    description: "A comprehensive business intelligence platform for real estate professionals built with React and Node.js. Realsynch seamlessly integrates with 30+ real estate systems, aggregating and analyzing business data through AWS cloud infrastructure. The platform features real-time dashboards, automated reporting, and predictive analytics powered by custom algorithms. Built with MongoDB for flexible data storage and deployed on AWS EC2 with S3 for secure file management, delivering actionable insights for brokerages and agents.",
+    image: "/realsynch.png",
+    category: "Business Intelligence",
+    features: ["React Dashboard", "AWS Cloud Infrastructure", "MongoDB Integration", "Real-time Analytics"],
+    url: "https://realsynch.com"
   },
   {
     id: 2,
     title: "Espacio Omnia",
-    description: "A comprehensive design system built for scalability and consistency across digital products. This project includes a complete component library, design tokens, and documentation that empowers teams to build cohesive user experiences. The system features responsive components, accessibility-first design patterns, and a flexible theming architecture that adapts to any brand requirements.",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop&crop=center",
-    category: "Design",
-    features: ["Component Library", "Design Tokens", "Accessibility Focus", "Brand Flexibility"]
+    description: "A modern event and coworking space management platform developed with Next.js and React. The application streamlines booking systems, member management, and event coordination through an intuitive interface. Built with PostgreSQL for robust data management and deployed on AWS with EC2 hosting and S3 media storage. Features real-time availability tracking, automated billing, and integrated payment processing, providing a seamless experience for both administrators and members.",
+    image: "/omnia.png",
+    category: "Platform",
+    features: ["Next.js Framework", "PostgreSQL Database", "AWS Deployment", "Real-time Booking"],
+    url: "https://www.espacioomnia.com"
   },
   {
     id: 3,
     title: "Lightmind Mobile App",
-    description: "A next-generation e-commerce solution that combines powerful backend functionality with exceptional user experience. Built with modern technologies, this platform handles everything from inventory management to payment processing, while providing customers with a seamless shopping experience. Features include advanced search capabilities, personalized recommendations, and mobile-optimized checkout flow.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center",
-    category: "E-commerce",
-    features: ["Advanced Search", "Payment Integration", "Mobile Optimized", "Inventory Management"]
+    description: "An AI-powered meditation and wellness mobile application built with React Native for cross-platform functionality. Lightmind delivers personalized meditation experiences through intelligent mood analysis and adaptive content delivery. The backend leverages Node.js with MongoDB for user data and session tracking, while AWS S3 stores audio content and meditation guides. Features include real-time ambient soundscapes, progress tracking, and customized meditation sessions tailored to individual user needs and goals.",
+    image: "/lightmind.png",
+    category: "Mobile App",
+    features: ["React Native", "AI Personalization", "MongoDB Backend", "AWS Media Delivery"],
+    url: "https://apps.apple.com/us/app/lightmind-tailored-meditation/id1662211527"
   },
   {
     id: 4,
     title: "Guadalajara's Zoo",
-    description: "An innovative workspace platform designed to enhance team productivity and streamline project management. This tool combines real-time communication, file sharing, and project tracking in one unified interface. With features like video conferencing integration, automated workflow management, and comprehensive analytics, teams can collaborate more effectively regardless of their physical location.",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&crop=center",
-    category: "Productivity",
-    features: ["Real-time Communication", "Project Tracking", "Video Integration", "Workflow Automation"]
+    description: "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
+    image: "/zoogdl.png",
+    category: "Public Service",
+    features: ["React Platform", "AWS Infrastructure", "PostgreSQL Database", "Mobile Integration"],
+    url: "https://zooguadalajara.com.mx"
   }
 ];
 
@@ -240,13 +242,16 @@ function Home() {
                     )}
                   </div>
                   
-                  <motion.button
+                  <motion.a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center text-black font-semibold text-lg group bg-gray-100 hover:bg-gray-200 px-6 py-3 rounded-full transition-all duration-300"
                     whileHover={{ x: 10, scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.3 }}
                   >
-                    View Project Details
+                    View Project Site
                     <svg 
                       className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
                       fill="none" 
@@ -255,7 +260,7 @@ function Home() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </motion.button>
+                  </motion.a>
                 </motion.div>
 
                 <motion.div 
@@ -319,27 +324,34 @@ function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                name: "Sarah Johnson",
-                company: "TechStart Inc.",
+                name: "Scott Wilson",
+                company: "Realsynch",
                 role: "CEO",
-                content: "Digital Crafters transformed our vision into reality. Their attention to detail and innovative approach exceeded our expectations. The team delivered a product that not only looks amazing but performs flawlessly.",
+                content: "Digital Crafters built our entire business intelligence platform from the ground up. Their expertise in React, Node.js, and AWS infrastructure helped us create a scalable solution that integrates seamlessly with 30+ real estate systems. The real-time analytics dashboard they developed has transformed how agents track their performance.",
                 rating: 5
               },
               {
-                name: "Michael Chen",
-                company: "GrowthCorp",
-                role: "CTO",
-                content: "Working with Digital Crafters was a game-changer for our business. They understood our needs perfectly and delivered a solution that scaled with our growth. Highly recommend their services.",
+                name: "Ana Martinez",
+                company: "Espacio Omnia",
+                role: "Operations Director",
+                content: "The booking and event management platform Digital Crafters created exceeded all expectations. Built with Next.js and PostgreSQL, it handles our complex scheduling needs flawlessly. The AWS deployment ensures we never experience downtime, and our members love the intuitive interface.",
                 rating: 5
               },
               {
-                name: "Emily Rodriguez",
-                company: "Creative Agency",
-                role: "Creative Director",
-                content: "The Digital Crafters team brought our creative vision to life with exceptional skill. Their technical expertise combined with creative flair made our project a huge success.",
+                name: "Pablo Gutierrez",
+                company: "LightMind Wellness",
+                role: "Founder",
+                content: "Digital Crafters developed our AI-powered meditation app with React Native, delivering a beautiful cross-platform experience. The MongoDB backend and AWS infrastructure they implemented handle thousands of daily users seamlessly. Their attention to UX design made our app truly stand out in the wellness space.",
+                rating: 5
+              },
+              {
+                name: "Carlos Mendoza",
+                company: "Guadalajara Zoo",
+                role: "Digital Innovation Manager",
+                content: "Our comprehensive digital ecosystem, built by Digital Crafters using React and PostgreSQL, revolutionized visitor experience. From ticket purchasing to virtual tours, every aspect runs smoothly on AWS infrastructure. The mobile app integration and real-time analytics have significantly improved our operations.",
                 rating: 5
               }
             ].map((testimonial, index) => (
@@ -361,14 +373,9 @@ function Home() {
                 <p className="text-gray-700 mb-6 italic leading-relaxed">
                   "{testimonial.content}"
                 </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-black">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">{testimonial.role} at {testimonial.company}</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold text-black">{testimonial.name}</h4>
+                  <p className="text-gray-600 text-sm">{testimonial.role} at {testimonial.company}</p>
                 </div>
               </motion.div>
             ))}
