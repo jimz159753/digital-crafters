@@ -1,34 +1,36 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { 
-  FaReact, 
-  FaNodeJs, 
-  FaSass, 
-  FaAws, 
-  FaGoogle, 
-  FaDigitalOcean 
-} from 'react-icons/fa';
-import { 
-  SiNextdotjs, 
-  SiMongodb, 
-  SiDrizzle, 
-  SiPostgresql, 
-  SiReact
-} from 'react-icons/si';
-import { GiArtificialIntelligence } from 'react-icons/gi';
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  FaReact,
+  FaNodeJs,
+  FaSass,
+  FaAws,
+  FaGoogle,
+  FaDigitalOcean,
+} from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiMongodb,
+  SiDrizzle,
+  SiPostgresql,
+  SiReact,
+} from "react-icons/si";
+import { GiArtificialIntelligence } from "react-icons/gi";
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  company: z.string().min(2, 'Company name must be at least 2 characters'),
-  field: z.string().min(2, 'Field must be at least 2 characters'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
-  captcha: z.boolean().refine(val => val === true, 'Please verify you are not a robot')
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  company: z.string().min(2, "Company name must be at least 2 characters"),
+  field: z.string().min(2, "Field must be at least 2 characters"),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  captcha: z
+    .boolean()
+    .refine((val) => val === true, "Please verify you are not a robot"),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -37,39 +39,63 @@ const portfolioProjects = [
   {
     id: 1,
     title: "Realsynch",
-    description: "A comprehensive business intelligence platform for real estate professionals built with React and Node.js. Realsynch seamlessly integrates with 30+ real estate systems, aggregating and analyzing business data through AWS cloud infrastructure. The platform features real-time dashboards, automated reporting, and predictive analytics powered by custom algorithms. Built with MongoDB for flexible data storage and deployed on AWS EC2 with S3 for secure file management, delivering actionable insights for brokerages and agents.",
+    description:
+      "A comprehensive business intelligence platform for real estate professionals built with React and Node.js. Realsynch seamlessly integrates with 30+ real estate systems, aggregating and analyzing business data through AWS cloud infrastructure. The platform features real-time dashboards, automated reporting, and predictive analytics powered by custom algorithms. Built with MongoDB for flexible data storage and deployed on AWS EC2 with S3 for secure file management, delivering actionable insights for brokerages and agents.",
     image: "/realsynch.png",
     category: "Business Intelligence",
-    features: ["React Dashboard", "AWS Cloud Infrastructure", "MongoDB Integration", "Real-time Analytics"],
-    url: "https://realsynch.com"
+    features: [
+      "React Dashboard",
+      "AWS Cloud Infrastructure",
+      "MongoDB Integration",
+      "Real-time Analytics",
+    ],
+    url: "https://realsynch.com",
   },
   {
     id: 2,
     title: "Espacio Omnia",
-    description: "A modern event and coworking space management platform developed with Next.js and React. The application streamlines booking systems, member management, and event coordination through an intuitive interface. Built with PostgreSQL for robust data management and deployed on AWS with EC2 hosting and S3 media storage. Features real-time availability tracking, automated billing, and integrated payment processing, providing a seamless experience for both administrators and members.",
+    description:
+      "A modern event and coworking space management platform developed with Next.js and React. The application streamlines booking systems, member management, and event coordination through an intuitive interface. Built with PostgreSQL for robust data management and deployed on AWS with EC2 hosting and S3 media storage. Features real-time availability tracking, automated billing, and integrated payment processing, providing a seamless experience for both administrators and members.",
     image: "/omnia.png",
     category: "Platform",
-    features: ["Next.js Framework", "PostgreSQL Database", "AWS Deployment", "Real-time Booking"],
-    url: "https://www.espacioomnia.com"
+    features: [
+      "Next.js Framework",
+      "PostgreSQL Database",
+      "AWS Deployment",
+      "Real-time Booking",
+    ],
+    url: "https://espacioomnia.com",
   },
   {
     id: 3,
     title: "Lightmind Mobile App",
-    description: "An AI-powered meditation and wellness mobile application built with React Native for cross-platform functionality. Lightmind delivers personalized meditation experiences through intelligent mood analysis and adaptive content delivery. The backend leverages Node.js with MongoDB for user data and session tracking, while AWS S3 stores audio content and meditation guides. Features include real-time ambient soundscapes, progress tracking, and customized meditation sessions tailored to individual user needs and goals.",
+    description:
+      "An AI-powered meditation and wellness mobile application built with React Native for cross-platform functionality. Lightmind delivers personalized meditation experiences through intelligent mood analysis and adaptive content delivery. The backend leverages Node.js with MongoDB for user data and session tracking, while AWS S3 stores audio content and meditation guides. Features include real-time ambient soundscapes, progress tracking, and customized meditation sessions tailored to individual user needs and goals.",
     image: "/lightmind.png",
     category: "Mobile App",
-    features: ["React Native", "AI Personalization", "MongoDB Backend", "AWS Media Delivery"],
-    url: "https://apps.apple.com/us/app/lightmind-tailored-meditation/id1662211527"
+    features: [
+      "React Native",
+      "AI Personalization",
+      "MongoDB Backend",
+      "AWS Media Delivery",
+    ],
+    url: "https://apps.apple.com/us/app/lightmind-tailored-meditation/id1662211527",
   },
   {
     id: 4,
     title: "Guadalajara's Zoo",
-    description: "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
+    description:
+      "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
     image: "/zoogdl.png",
     category: "Public Service",
-    features: ["React Platform", "AWS Infrastructure", "PostgreSQL Database", "Mobile Integration"],
-    url: "https://zooguadalajara.com.mx"
-  }
+    features: [
+      "React Platform",
+      "AWS Infrastructure",
+      "PostgreSQL Database",
+      "Mobile Integration",
+    ],
+    url: "https://zooguadalajara.com.mx",
+  },
 ];
 
 function Home() {
@@ -78,7 +104,16 @@ function Home() {
   return (
     <>
       <div className="min-h-screen bg-gray-100 p-8 relative">
-        <div className="h-full relative bg-black text-white relative overflow-hidden rounded-[50px]" style={{ minHeight: 'calc(100vh - 4rem)', backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+        <div
+          className="h-full relative bg-black text-white relative overflow-hidden rounded-[50px]"
+          style={{
+            minHeight: "calc(100vh - 4rem)",
+            backgroundImage: "url(/bg.png)",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        >
           <div
             className="absolute inset-0 opacity-20 rounded-[50px]"
             style={{
@@ -86,18 +121,24 @@ function Home() {
                 linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
               `,
-              backgroundSize: '50px 50px'
+              backgroundSize: "50px 50px",
             }}
           />
-          
+
           <header className="relative z-10 flex justify-between items-center p-8">
             <div className="flex-1 flex">
-              <h1 className="text-4xl font-bold text-white">Digital Crafters</h1>
+              <h1 className="text-4xl font-bold text-white">
+                Digital Crafters
+              </h1>
             </div>
 
             <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
+              <svg
+                className="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386" />
               </svg>
             </div>
           </header>
@@ -141,7 +182,7 @@ function Home() {
       {/* Portfolio Section */}
       <div ref={containerRef} className="bg-white text-black min-h-screen">
         <div className="max-w-7xl mx-auto px-8 py-16">
-          <motion.div 
+          <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -152,11 +193,13 @@ function Home() {
               Our Work
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-              Discover our latest projects and see how we bring ideas to life through innovative design and technology. Each project represents our commitment to excellence and creative problem-solving.
+              Discover our latest projects and see how we bring ideas to life
+              through innovative design and technology. Each project represents
+              our commitment to excellence and creative problem-solving.
             </p>
-            
+
             {/* Stats */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +210,7 @@ function Home() {
                 { number: "25+", label: "Projects Completed" },
                 { number: "25+", label: "Happy Clients" },
                 { number: "100%", label: "Success Rate" },
-                { number: "12+", label: "Technologies" }
+                { number: "12+", label: "Technologies" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -177,8 +220,12 @@ function Home() {
                   transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-black mb-2">{stat.number}</div>
-                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-black mb-2">
+                    {stat.number}
+                  </div>
+                  <div className="text-sm text-gray-600 font-medium">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -186,19 +233,19 @@ function Home() {
 
           {portfolioProjects.map((project, index) => {
             const isEven = index % 2 === 0;
-            
+
             return (
               <motion.div
                 key={project.id}
                 className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-32 ${
-                  !isEven ? 'lg:flex-row-reverse' : ''
+                  !isEven ? "lg:flex-row-reverse" : ""
                 }`}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
                 viewport={{ once: true, margin: "-100px" }}
               >
-                <motion.div 
+                <motion.div
                   className="flex-1 space-y-8"
                   initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -210,19 +257,21 @@ function Home() {
                       {project.category}
                     </span>
                   </div>
-                  
+
                   <h3 className="text-4xl md:text-5xl font-bold text-black leading-tight">
                     {project.title}
                   </h3>
-                  
+
                   <div className="space-y-6">
                     <p className="text-xl text-gray-700 leading-relaxed">
                       {project.description}
                     </p>
-                    
+
                     {project.features && (
                       <div className="space-y-3">
-                        <h4 className="text-lg font-semibold text-black">Key Features:</h4>
+                        <h4 className="text-lg font-semibold text-black">
+                          Key Features:
+                        </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {project.features.map((feature, idx) => (
                             <motion.div
@@ -230,18 +279,23 @@ function Home() {
                               className="flex items-center space-x-2"
                               initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
+                              transition={{
+                                duration: 0.5,
+                                delay: 0.6 + idx * 0.1,
+                              }}
                               viewport={{ once: true }}
                             >
                               <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
-                              <span className="text-gray-600 text-sm font-medium">{feature}</span>
+                              <span className="text-gray-600 text-sm font-medium">
+                                {feature}
+                              </span>
                             </motion.div>
                           ))}
                         </div>
                       </div>
                     )}
                   </div>
-                  
+
                   <motion.a
                     href={project.url}
                     target="_blank"
@@ -252,18 +306,23 @@ function Home() {
                     transition={{ duration: 0.3 }}
                   >
                     View Project Site
-                    <svg 
-                      className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </motion.a>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="flex-1 w-full"
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -272,16 +331,16 @@ function Home() {
                 >
                   <div className="relative">
                     {/* Project Number */}
-                    <motion.div 
+                    <motion.div
                       className="absolute -top-4 -left-4 z-10 w-16 h-16 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl"
                       initial={{ scale: 0, rotate: -180 }}
                       whileInView={{ scale: 1, rotate: 0 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
                       viewport={{ once: true }}
                     >
-                      {String(index + 1).padStart(2, '0')}
+                      {String(index + 1).padStart(2, "0")}
                     </motion.div>
-                    
+
                     <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
                       <motion.img
                         src={project.image}
@@ -291,11 +350,15 @@ function Home() {
                         transition={{ duration: 0.7 }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-30 transition-all duration-500" />
-                      
+
                       {/* Overlay Content */}
                       <div className="absolute bottom-6 left-6 right-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                        <h4 className="text-white font-bold text-xl mb-2">{project.title}</h4>
-                        <p className="text-white text-opacity-80 text-sm">{project.description.substring(0, 100)}...</p>
+                        <h4 className="text-white font-bold text-xl mb-2">
+                          {project.title}
+                        </h4>
+                        <p className="text-white text-opacity-80 text-sm">
+                          {project.description.substring(0, 100)}...
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -309,7 +372,7 @@ function Home() {
       {/* Testimonials Section */}
       <div className="bg-gray-50 text-black py-20">
         <div className="max-w-7xl mx-auto px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -320,7 +383,8 @@ function Home() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to say about their experience working with Digital Crafters.
+              Don't just take our word for it. Here's what our clients have to
+              say about their experience working with Digital Crafters.
             </p>
           </motion.div>
 
@@ -330,30 +394,34 @@ function Home() {
                 name: "Scott Wilson",
                 company: "Realsynch",
                 role: "CEO",
-                content: "Digital Crafters built our entire business intelligence platform from the ground up. Their expertise in React, Node.js, and AWS infrastructure helped us create a scalable solution that integrates seamlessly with 30+ real estate systems. The real-time analytics dashboard they developed has transformed how agents track their performance.",
-                rating: 5
+                content:
+                  "Digital Crafters built our entire business intelligence platform from the ground up. Their expertise in React, Node.js, and AWS infrastructure helped us create a scalable solution that integrates seamlessly with 30+ real estate systems. The real-time analytics dashboard they developed has transformed how agents track their performance.",
+                rating: 5,
               },
               {
                 name: "Ana Martinez",
                 company: "Espacio Omnia",
                 role: "Operations Director",
-                content: "The booking and event management platform Digital Crafters created exceeded all expectations. Built with Next.js and PostgreSQL, it handles our complex scheduling needs flawlessly. The AWS deployment ensures we never experience downtime, and our members love the intuitive interface.",
-                rating: 5
+                content:
+                  "The booking and event management platform Digital Crafters created exceeded all expectations. Built with Next.js and PostgreSQL, it handles our complex scheduling needs flawlessly. The AWS deployment ensures we never experience downtime, and our members love the intuitive interface.",
+                rating: 5,
               },
               {
                 name: "Pablo Gutierrez",
                 company: "LightMind Wellness",
                 role: "Founder",
-                content: "Digital Crafters developed our AI-powered meditation app with React Native, delivering a beautiful cross-platform experience. The MongoDB backend and AWS infrastructure they implemented handle thousands of daily users seamlessly. Their attention to UX design made our app truly stand out in the wellness space.",
-                rating: 5
+                content:
+                  "Digital Crafters developed our AI-powered meditation app with React Native, delivering a beautiful cross-platform experience. The MongoDB backend and AWS infrastructure they implemented handle thousands of daily users seamlessly. Their attention to UX design made our app truly stand out in the wellness space.",
+                rating: 5,
               },
               {
                 name: "Carlos Mendoza",
                 company: "Guadalajara Zoo",
                 role: "Digital Innovation Manager",
-                content: "Our comprehensive digital ecosystem, built by Digital Crafters using React and PostgreSQL, revolutionized visitor experience. From ticket purchasing to virtual tours, every aspect runs smoothly on AWS infrastructure. The mobile app integration and real-time analytics have significantly improved our operations.",
-                rating: 5
-              }
+                content:
+                  "Our comprehensive digital ecosystem, built by Digital Crafters using React and PostgreSQL, revolutionized visitor experience. From ticket purchasing to virtual tours, every aspect runs smoothly on AWS infrastructure. The mobile app integration and real-time analytics have significantly improved our operations.",
+                rating: 5,
+              },
             ].map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -365,8 +433,12 @@ function Home() {
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
-                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    <svg
+                      key={i}
+                      className="w-5 h-5 text-yellow-500 fill-current"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                     </svg>
                   ))}
                 </div>
@@ -374,8 +446,12 @@ function Home() {
                   "{testimonial.content}"
                 </p>
                 <div>
-                  <h4 className="font-semibold text-black">{testimonial.name}</h4>
-                  <p className="text-gray-600 text-sm">{testimonial.role} at {testimonial.company}</p>
+                  <h4 className="font-semibold text-black">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    {testimonial.role} at {testimonial.company}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -386,7 +462,7 @@ function Home() {
       {/* Technologies Section */}
       <div className="bg-black text-white py-20">
         <div className="max-w-7xl mx-auto px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -397,7 +473,8 @@ function Home() {
               Technologies We Use
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We work with cutting-edge technologies to deliver modern, scalable, and efficient solutions for your business needs.
+              We work with cutting-edge technologies to deliver modern,
+              scalable, and efficient solutions for your business needs.
             </p>
           </motion.div>
 
@@ -410,11 +487,23 @@ function Home() {
               { icon: FaSass, name: "Sass", color: "text-pink-500" },
               { icon: SiMongodb, name: "MongoDB", color: "text-green-400" },
               { icon: SiDrizzle, name: "Drizzle", color: "text-green-400" },
-              { icon: SiPostgresql, name: "PostgreSQL", color: "text-blue-500" },
+              {
+                icon: SiPostgresql,
+                name: "PostgreSQL",
+                color: "text-blue-500",
+              },
               { icon: FaAws, name: "AWS", color: "text-orange-400" },
-              { icon: FaDigitalOcean, name: "DigitalOcean", color: "text-blue-400" },
+              {
+                icon: FaDigitalOcean,
+                name: "DigitalOcean",
+                color: "text-blue-400",
+              },
               { icon: FaGoogle, name: "Google Cloud", color: "text-blue-500" },
-              { icon: GiArtificialIntelligence, name: "AI/ML", color: "text-purple-500" }
+              {
+                icon: GiArtificialIntelligence,
+                name: "AI/ML",
+                color: "text-purple-500",
+              },
             ].map((tech, index) => (
               <motion.div
                 key={index}
@@ -426,7 +515,9 @@ function Home() {
                 whileHover={{ scale: 1.1 }}
               >
                 <div className="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-2xl group-hover:bg-gray-700 transition-colors duration-300 mb-4">
-                  <tech.icon className={`text-4xl ${tech.color} group-hover:scale-110 transition-transform duration-300`} />
+                  <tech.icon
+                    className={`text-4xl ${tech.color} group-hover:scale-110 transition-transform duration-300`}
+                  />
                 </div>
                 <h3 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-300">
                   {tech.name}
@@ -440,7 +531,7 @@ function Home() {
       {/* Contact Form Section */}
       <div className="bg-white text-black py-20">
         <div className="max-w-4xl mx-auto px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -451,7 +542,8 @@ function Home() {
               Let's Work Together
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ready to bring your ideas to life? Get in touch with us and let's discuss how we can help you achieve your goals.
+              Ready to bring your ideas to life? Get in touch with us and let's
+              discuss how we can help you achieve your goals.
             </p>
           </motion.div>
 
@@ -470,18 +562,18 @@ function ContactForm() {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema)
+    resolver: zodResolver(contactFormSchema),
   });
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -490,11 +582,11 @@ function ContactForm() {
         setIsSubmitted(true);
         reset();
       } else {
-        throw new Error('Failed to submit form');
+        throw new Error("Failed to submit form");
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('There was an error submitting your form. Please try again.');
+      console.error("Error submitting form:", error);
+      alert("There was an error submitting your form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -509,13 +601,24 @@ function ContactForm() {
         transition={{ duration: 0.6 }}
       >
         <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
         <p className="text-gray-600 mb-6">
-          Your message has been sent successfully. We'll get back to you within 24 hours.
+          Your message has been sent successfully. We'll get back to you within
+          24 hours.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
@@ -538,11 +641,14 @@ function ContactForm() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Full Name *
           </label>
           <input
-            {...register('name')}
+            {...register("name")}
             type="text"
             id="name"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
@@ -554,11 +660,14 @@ function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Email Address *
           </label>
           <input
-            {...register('email')}
+            {...register("email")}
             type="email"
             id="email"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
@@ -572,27 +681,35 @@ function ContactForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="company"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Company Name *
           </label>
           <input
-            {...register('company')}
+            {...register("company")}
             type="text"
             id="company"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
             placeholder="Your company name"
           />
           {errors.company && (
-            <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.company.message}
+            </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="field" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="field"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Industry/Field *
           </label>
           <input
-            {...register('field')}
+            {...register("field")}
             type="text"
             id="field"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
@@ -605,24 +722,29 @@ function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700 mb-2"
+        >
           Project Description *
         </label>
         <textarea
-          {...register('description')}
+          {...register("description")}
           id="description"
           rows={6}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
           placeholder="Tell us about your project, goals, and how we can help you..."
         />
         {errors.description && (
-          <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+          <p className="mt-1 text-sm text-red-600">
+            {errors.description.message}
+          </p>
         )}
       </div>
 
       <div className="flex items-center">
         <input
-          {...register('captcha')}
+          {...register("captcha")}
           type="checkbox"
           id="captcha"
           className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
@@ -644,14 +766,30 @@ function ContactForm() {
       >
         {isSubmitting ? (
           <>
-            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
             Sending Message...
           </>
         ) : (
-          'Send Message'
+          "Send Message"
         )}
       </motion.button>
     </motion.form>
