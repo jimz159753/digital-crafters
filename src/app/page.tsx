@@ -1,72 +1,654 @@
-import Spline from '@splinetool/react-spline/next';
+'use client';
 
-export default function Home() {
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { 
+  FaReact, 
+  FaNodeJs, 
+  FaSass, 
+  FaAws, 
+  FaGoogle, 
+  FaDigitalOcean 
+} from 'react-icons/fa';
+import { 
+  SiNextdotjs, 
+  SiMongodb, 
+  SiDrizzle, 
+  SiPostgresql, 
+  SiReact
+} from 'react-icons/si';
+import { GiArtificialIntelligence } from 'react-icons/gi';
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  company: z.string().min(2, 'Company name must be at least 2 characters'),
+  field: z.string().min(2, 'Field must be at least 2 characters'),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  captcha: z.boolean().refine(val => val === true, 'Please verify you are not a robot')
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
+const portfolioProjects = [
+  {
+    id: 1,
+    title: "Realsynch",
+    description: "your personal business advisor and data powerhouse. Seamlessly integrating, aggregating, and analyzing your business data, Realsynch provides a crystal-clear view of where your business stands and where you should focus your efforts.\n" +
+        "\n" +
+        "With a user-friendly dashboard designed to enhance sales and productivity, you'll make confident, data-driven decisions that drive success for both you and your agents—all without needing advanced computer skills.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
+    category: "AI",
+    features: ["Machine Learning Integration", "Real-time Analytics", "Custom Visualizations", "Automated Reporting"]
+  },
+  {
+    id: 2,
+    title: "Espacio Omnia",
+    description: "A comprehensive design system built for scalability and consistency across digital products. This project includes a complete component library, design tokens, and documentation that empowers teams to build cohesive user experiences. The system features responsive components, accessibility-first design patterns, and a flexible theming architecture that adapts to any brand requirements.",
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop&crop=center",
+    category: "Design",
+    features: ["Component Library", "Design Tokens", "Accessibility Focus", "Brand Flexibility"]
+  },
+  {
+    id: 3,
+    title: "Lightmind Mobile App",
+    description: "A next-generation e-commerce solution that combines powerful backend functionality with exceptional user experience. Built with modern technologies, this platform handles everything from inventory management to payment processing, while providing customers with a seamless shopping experience. Features include advanced search capabilities, personalized recommendations, and mobile-optimized checkout flow.",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center",
+    category: "E-commerce",
+    features: ["Advanced Search", "Payment Integration", "Mobile Optimized", "Inventory Management"]
+  },
+  {
+    id: 4,
+    title: "Guadalajara's Zoo",
+    description: "An innovative workspace platform designed to enhance team productivity and streamline project management. This tool combines real-time communication, file sharing, and project tracking in one unified interface. With features like video conferencing integration, automated workflow management, and comprehensive analytics, teams can collaborate more effectively regardless of their physical location.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&crop=center",
+    category: "Productivity",
+    features: ["Real-time Communication", "Project Tracking", "Video Integration", "Workflow Automation"]
+  }
+];
+
+function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="h-full bg-black text-white relative overflow-hidden rounded-[50px]" style={{ minHeight: 'calc(100vh - 4rem)' }}>
-        <div 
-          className="absolute inset-0 opacity-20 rounded-[50px]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <header className="relative z-10 flex justify-between items-center p-8">
-          <div className="flex-1 flex justify-center">
-            <h1 className="text-4xl font-bold text-white">Digital Crafters</h1>
-          </div>
+    <>
+      <div className="min-h-screen bg-gray-100 p-8 relative">
+        <div className="h-full relative bg-black text-white relative overflow-hidden rounded-[50px]" style={{ minHeight: 'calc(100vh - 4rem)', backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+          <div
+            className="absolute inset-0 opacity-20 rounded-[50px]"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+          />
           
-          <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
-            </svg>
-          </div>
-        </header>
-
-        <main className="relative z-10 flex flex-col h-full">
-          <div className="flex-1 flex items-center justify-center px-8">
-            <div className="w-full max-w-6xl h-[60vh] flex items-center justify-center pointer-events-none">
-              <Spline
-                scene="https://prod.spline.design/Pjd673OcDqi3LUrg/scene.splinecode"
-                className="w-full h-full pointer-events-none"
-                style={{ pointerEvents: 'none' }}
-              />
+          <header className="relative z-10 flex justify-between items-center p-8">
+            <div className="flex-1 flex">
+              <h1 className="text-4xl font-bold text-white">Digital Crafters</h1>
             </div>
-          </div>
 
-          <div className="text-center pb-16 px-8">
-            <div className="flex items-center justify-center mb-8">
-              <h2 className="text-5xl md:text-7xl font-bold text-white mr-4">
-                we make apps
-              </h2>
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-2xl md:text-3xl">😊</span>
+            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
+              </svg>
+            </div>
+          </header>
+
+          <main className="h-max z-10 flex flex-col h-full absolute bottom-0">
+            <div className="flex-1 flex items-center  px-8">
+              <div className="w-full max-w-6xl flex items-center  pointer-events-none">
+                <div className="text-center pb-16 px-8">
+                  <div className="flex items-center  mb-8">
+                    <h2 className="text-5xl md:text-7xl font-bold text-white mr-4">
+                      we make apps
+                    </h2>
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-2xl md:text-3xl">😊</span>
+                    </div>
+                  </div>
+
+                  <div className="text-5xl md:text-7xl font-bold text-white mb-4">
+                    <span>for </span>
+                    <span className="relative inline-block">
+                      the new mainstream
+                      <div className="absolute -bottom-4 left-0 right-0">
+                        <svg viewBox="0 0 400 20" className="w-full h-6">
+                          <path
+                            d="M 5 15 Q 200 5 395 15"
+                            stroke="white"
+                            strokeWidth="2"
+                            fill="none"
+                          />
+                        </svg>
+                      </div>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <div className="text-5xl md:text-7xl font-bold text-white mb-4">
-              <span>for </span>
-              <span className="relative inline-block">
-                the new mainstream
-                <div className="absolute -bottom-4 left-0 right-0">
-                  <svg viewBox="0 0 400 20" className="w-full h-6">
-                    <path
-                      d="M 5 15 Q 200 5 395 15"
-                      stroke="white"
-                      strokeWidth="2"
-                      fill="none"
-                    />
-                  </svg>
-                </div>
-              </span>
-            </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
+
+      {/* Portfolio Section */}
+      <div ref={containerRef} className="bg-white text-black min-h-screen">
+        <div className="max-w-7xl mx-auto px-8 py-16">
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-6xl md:text-8xl font-bold text-black mb-6">
+              Our Work
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+              Discover our latest projects and see how we bring ideas to life through innovative design and technology. Each project represents our commitment to excellence and creative problem-solving.
+            </p>
+            
+            {/* Stats */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {[
+                { number: "25+", label: "Projects Completed" },
+                { number: "25+", label: "Happy Clients" },
+                { number: "100%", label: "Success Rate" },
+                { number: "12+", label: "Technologies" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-3xl md:text-4xl font-bold text-black mb-2">{stat.number}</div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {portfolioProjects.map((project, index) => {
+            const isEven = index % 2 === 0;
+            
+            return (
+              <motion.div
+                key={project.id}
+                className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 mb-32 ${
+                  !isEven ? 'lg:flex-row-reverse' : ''
+                }`}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <motion.div 
+                  className="flex-1 space-y-8"
+                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="inline-block">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider bg-gray-100 px-4 py-2 rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-4xl md:text-5xl font-bold text-black leading-tight">
+                    {project.title}
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    <p className="text-xl text-gray-700 leading-relaxed">
+                      {project.description}
+                    </p>
+                    
+                    {project.features && (
+                      <div className="space-y-3">
+                        <h4 className="text-lg font-semibold text-black">Key Features:</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {project.features.map((feature, idx) => (
+                            <motion.div
+                              key={idx}
+                              className="flex items-center space-x-2"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
+                              viewport={{ once: true }}
+                            >
+                              <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                              <span className="text-gray-600 text-sm font-medium">{feature}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <motion.button
+                    className="inline-flex items-center text-black font-semibold text-lg group bg-gray-100 hover:bg-gray-200 px-6 py-3 rounded-full transition-all duration-300"
+                    whileHover={{ x: 10, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    View Project Details
+                    <svg 
+                      className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </motion.button>
+                </motion.div>
+
+                <motion.div 
+                  className="flex-1 w-full"
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative">
+                    {/* Project Number */}
+                    <motion.div 
+                      className="absolute -top-4 -left-4 z-10 w-16 h-16 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl"
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      transition={{ duration: 0.8, delay: 0.8 }}
+                      viewport={{ once: true }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </motion.div>
+                    
+                    <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+                      <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-105"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.7 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-30 transition-all duration-500" />
+                      
+                      {/* Overlay Content */}
+                      <div className="absolute bottom-6 left-6 right-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <h4 className="text-white font-bold text-xl mb-2">{project.title}</h4>
+                        <p className="text-white text-opacity-80 text-sm">{project.description.substring(0, 100)}...</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="bg-gray-50 text-black py-20">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Don't just take our word for it. Here's what our clients have to say about their experience working with Digital Crafters.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Johnson",
+                company: "TechStart Inc.",
+                role: "CEO",
+                content: "Digital Crafters transformed our vision into reality. Their attention to detail and innovative approach exceeded our expectations. The team delivered a product that not only looks amazing but performs flawlessly.",
+                rating: 5
+              },
+              {
+                name: "Michael Chen",
+                company: "GrowthCorp",
+                role: "CTO",
+                content: "Working with Digital Crafters was a game-changer for our business. They understood our needs perfectly and delivered a solution that scaled with our growth. Highly recommend their services.",
+                rating: 5
+              },
+              {
+                name: "Emily Rodriguez",
+                company: "Creative Agency",
+                role: "Creative Director",
+                content: "The Digital Crafters team brought our creative vision to life with exceptional skill. Their technical expertise combined with creative flair made our project a huge success.",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 italic leading-relaxed">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="font-semibold text-black">{testimonial.name}</h4>
+                    <p className="text-gray-600 text-sm">{testimonial.role} at {testimonial.company}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Technologies Section */}
+      <div className="bg-black text-white py-20">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+              Technologies We Use
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We work with cutting-edge technologies to deliver modern, scalable, and efficient solutions for your business needs.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            {[
+              { icon: FaReact, name: "React", color: "text-blue-400" },
+              { icon: SiReact, name: "React Native", color: "text-blue-400" },
+              { icon: SiNextdotjs, name: "Next.js", color: "text-white" },
+              { icon: FaNodeJs, name: "Node.js", color: "text-green-500" },
+              { icon: FaSass, name: "Sass", color: "text-pink-500" },
+              { icon: SiMongodb, name: "MongoDB", color: "text-green-400" },
+              { icon: SiDrizzle, name: "Drizzle", color: "text-green-400" },
+              { icon: SiPostgresql, name: "PostgreSQL", color: "text-blue-500" },
+              { icon: FaAws, name: "AWS", color: "text-orange-400" },
+              { icon: FaDigitalOcean, name: "DigitalOcean", color: "text-blue-400" },
+              { icon: FaGoogle, name: "Google Cloud", color: "text-blue-500" },
+              { icon: GiArtificialIntelligence, name: "AI/ML", color: "text-purple-500" }
+            ].map((tech, index) => (
+              <motion.div
+                key={index}
+                className="flex flex-col items-center group cursor-pointer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <div className="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-2xl group-hover:bg-gray-700 transition-colors duration-300 mb-4">
+                  <tech.icon className={`text-4xl ${tech.color} group-hover:scale-110 transition-transform duration-300`} />
+                </div>
+                <h3 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-300">
+                  {tech.name}
+                </h3>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Form Section */}
+      <div className="bg-white text-black py-20">
+        <div className="max-w-4xl mx-auto px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
+              Let's Work Together
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ready to bring your ideas to life? Get in touch with us and let's discuss how we can help you achieve your goals.
+            </p>
+          </motion.div>
+
+          <ContactForm />
+        </div>
+      </div>
+    </>
   );
 }
+
+function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema)
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        reset();
+      } else {
+        throw new Error('Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <motion.div
+        className="text-center p-12 bg-green-50 rounded-2xl"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
+        <p className="text-gray-600 mb-6">
+          Your message has been sent successfully. We'll get back to you within 24 hours.
+        </p>
+        <button
+          onClick={() => setIsSubmitted(false)}
+          className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+        >
+          Send Another Message
+        </button>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+            Full Name *
+          </label>
+          <input
+            {...register('name')}
+            type="text"
+            id="name"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+            placeholder="Your full name"
+          />
+          {errors.name && (
+            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            Email Address *
+          </label>
+          <input
+            {...register('email')}
+            type="email"
+            id="email"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+            placeholder="your.email@company.com"
+          />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+            Company Name *
+          </label>
+          <input
+            {...register('company')}
+            type="text"
+            id="company"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+            placeholder="Your company name"
+          />
+          {errors.company && (
+            <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="field" className="block text-sm font-medium text-gray-700 mb-2">
+            Industry/Field *
+          </label>
+          <input
+            {...register('field')}
+            type="text"
+            id="field"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+            placeholder="e.g., Technology, Healthcare, Finance"
+          />
+          {errors.field && (
+            <p className="mt-1 text-sm text-red-600">{errors.field.message}</p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          Project Description *
+        </label>
+        <textarea
+          {...register('description')}
+          id="description"
+          rows={6}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+          placeholder="Tell us about your project, goals, and how we can help you..."
+        />
+        {errors.description && (
+          <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+        )}
+      </div>
+
+      <div className="flex items-center">
+        <input
+          {...register('captcha')}
+          type="checkbox"
+          id="captcha"
+          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        />
+        <label htmlFor="captcha" className="ml-2 block text-sm text-gray-700">
+          I'm not a robot *
+        </label>
+        {errors.captcha && (
+          <p className="ml-2 text-sm text-red-600">{errors.captcha.message}</p>
+        )}
+      </div>
+
+      <motion.button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-black text-white font-semibold py-4 px-8 rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        {isSubmitting ? (
+          <>
+            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Sending Message...
+          </>
+        ) : (
+          'Send Message'
+        )}
+      </motion.button>
+    </motion.form>
+  );
+}
+
+export default Home;
