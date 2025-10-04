@@ -83,7 +83,7 @@ const portfolioProjects = [
   },
   {
     id: 4,
-    title: "Guadalajara's Zoo",
+    title: "Guadalajara&#39;s Zoo",
     description:
       "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
     image: "/zoogdl.png",
@@ -383,8 +383,8 @@ function Home() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to
-              say about their experience working with Digital Crafters.
+              Don&#39;t just take our word for it. Here&#39;s what our clients
+              have to say about their experience working with Digital Crafters.
             </p>
           </motion.div>
 
@@ -443,7 +443,7 @@ function Home() {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 italic leading-relaxed">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
                 <div>
                   <h4 className="font-semibold text-black">
@@ -539,11 +539,11 @@ function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
-              Let's Work Together
+              Let&#39;s Work Together
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ready to bring your ideas to life? Get in touch with us and let's
-              discuss how we can help you achieve your goals.
+              Ready to bring your ideas to life? Get in touch with us and
+              let&#39;s discuss how we can help you achieve your goals.
             </p>
           </motion.div>
 
@@ -617,8 +617,8 @@ function ContactForm() {
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
         <p className="text-gray-600 mb-6">
-          Your message has been sent successfully. We'll get back to you within
-          24 hours.
+          Your message has been sent successfully. We&#39;ll get back to you
+          within 24 hours.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
@@ -750,7 +750,7 @@ function ContactForm() {
           className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
         />
         <label htmlFor="captcha" className="ml-2 block text-sm text-gray-700">
-          I'm not a robot *
+          I&#39;m not a robot *
         </label>
         {errors.captcha && (
           <p className="ml-2 text-sm text-red-600">{errors.captcha.message}</p>
