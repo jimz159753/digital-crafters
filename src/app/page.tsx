@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,9 @@ import {
   FaAws,
   FaGoogle,
   FaDigitalOcean,
+  FaStar,
+  FaLightbulb,
+  FaHandshake,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -21,6 +24,9 @@ import {
   SiReact,
 } from "react-icons/si";
 import { GiArtificialIntelligence } from "react-icons/gi";
+const digitalCraftersLogo = "/digital_crafters.webp";
+const squaresVideo = "/squares.mp4";
+import Image from "next/image";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -83,7 +89,7 @@ const portfolioProjects = [
   },
   {
     id: 4,
-    title: "Guadalajara&#39;s Zoo",
+    title: "Guadalajara Zoo",
     description:
       "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
     image: "/zoogdl.png",
@@ -100,93 +106,339 @@ const portfolioProjects = [
 
 function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 p-8 relative">
-        <div
-          className="h-full relative bg-black text-white relative overflow-hidden rounded-[50px]"
-          style={{
-            minHeight: "calc(100vh - 4rem)",
-            backgroundImage: "url(/bg.png)",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        >
-          <div
-            className="absolute inset-0 opacity-20 rounded-[50px]"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "50px 50px",
-            }}
-          />
-
-          <header className="relative z-10 flex justify-between items-center p-8">
-            <div className="flex-1 flex">
-              <h1 className="text-4xl font-bold text-white">
-                Digital Crafters
-              </h1>
+      {/* Navigation Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Image
+                src={digitalCraftersLogo}
+                alt="Digital Crafters"
+                height={200}
+                width={200}
+              />
             </div>
 
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
+            <div className="hidden md:flex items-center space-x-8">
+              <a
+                href="#about"
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386" />
-              </svg>
+                About
+              </a>
+              <a
+                href="#portfolio"
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
+              >
+                Portfolio
+              </a>
+              <a
+                href="#testimonials"
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
+              >
+                Testimonials
+              </a>
+              <a
+                href="#technologies"
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
+              >
+                Technologies
+              </a>
+              <a
+                href="#contact"
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
+              >
+                Contact
+              </a>
             </div>
-          </header>
 
-          <main className="h-max z-10 flex flex-col h-full absolute bottom-0">
-            <div className="flex-1 flex items-center  px-8">
-              <div className="w-full max-w-6xl flex items-center  pointer-events-none">
-                <div className="text-center pb-16 px-8">
-                  <div className="flex items-center  mb-8">
-                    <h2 className="text-5xl md:text-7xl font-bold text-white mr-4">
-                      we make apps
-                    </h2>
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-2xl md:text-3xl">😊</span>
-                    </div>
-                  </div>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-600 hover:text-black transition-colors duration-300"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={
+                      isMobileMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
 
-                  <div className="text-5xl md:text-7xl font-bold text-white mb-4">
-                    <span>for </span>
-                    <span className="relative inline-block">
-                      the new mainstream
-                      <div className="absolute -bottom-4 left-0 right-0">
-                        <svg viewBox="0 0 400 20" className="w-full h-6">
-                          <path
-                            d="M 5 15 Q 200 5 395 15"
-                            stroke="white"
-                            strokeWidth="2"
-                            fill="none"
-                          />
-                        </svg>
-                      </div>
-                    </span>
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden bg-white border-t border-gray-200 overflow-hidden"
+            >
+              <motion.div
+                className="px-8 py-4 space-y-4"
+                initial={{ y: -20 }}
+                animate={{ y: 0 }}
+                exit={{ y: -20 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
+                <motion.a
+                  href="#about"
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.2 }}
+                >
+                  About
+                </motion.a>
+                <motion.a
+                  href="#portfolio"
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.25 }}
+                >
+                  Portfolio
+                </motion.a>
+                <motion.a
+                  href="#testimonials"
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.3 }}
+                >
+                  Testimonials
+                </motion.a>
+                <motion.a
+                  href="#technologies"
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.35 }}
+                >
+                  Technologies
+                </motion.a>
+                <motion.a
+                  href="#contact"
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.4 }}
+                >
+                  Contact
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      <div id="home" className="min-h-screen bg-gray-100 p-8 relative pt-24">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.2)" }}
+        >
+          <source src={squaresVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute sm:w-3/4 w-full text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl flex flex-col gap-4 items-center">
+          <motion.p
+            className="hero-text text-white md:text-6xl text-4xl font-bold"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            Scale Business to drive Results
+          </motion.p>
+          <motion.p
+            className="hero-text text-gray-300 sm:text-sm text-base text-center md:w-1/2 w-4/5 font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Manage all your data and workflows in one place. Automate processes,
+            gain insights, and scale your business with ease.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* About Section */}
+      <div id="about" className="bg-white text-black py-20">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
+              About Digital Crafters
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We are a team of passionate developers and designers dedicated to
+              creating exceptional digital experiences that drive business
+              growth and innovation.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-3xl md:text-4xl font-bold text-black mb-6">
+                Crafting Digital Excellence
+              </h3>
+              <div className="space-y-6">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  At Digital Crafters, we believe in the power of technology to
+                  transform businesses. Our team combines technical expertise
+                  with creative vision to deliver solutions that not only meet
+                  your needs but exceed your expectations.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  From concept to deployment, we work closely with our clients
+                  to understand their unique challenges and create tailored
+                  solutions that drive real results. Our commitment to quality
+                  and innovation has helped businesses across various industries
+                  scale and succeed in the digital landscape.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-gray-100 rounded-2xl p-8 h-96 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg
+                      className="w-12 h-12 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                      />
+                    </svg>
                   </div>
+                  <h4 className="text-xl font-semibold text-black mb-2">
+                    Our Mission
+                  </h4>
+                  <p className="text-gray-600">
+                    To empower businesses through innovative technology
+                    solutions that drive growth and success.
+                  </p>
                 </div>
               </div>
+            </motion.div>
+          </div>
+
+          {/* Values Section */}
+          <motion.div
+            className="mt-20"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-3xl md:text-4xl font-bold text-black text-center mb-12">
+              Our Core Values
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Innovation",
+                  description:
+                    "We stay at the forefront of technology, constantly exploring new tools and methodologies to deliver cutting-edge solutions.",
+                  icon: <FaLightbulb />,
+                },
+                {
+                  title: "Quality",
+                  description:
+                    "Every project is crafted with meticulous attention to detail, ensuring robust, scalable, and maintainable code.",
+                  icon: <FaStar />,
+                },
+                {
+                  title: "Partnership",
+                  description:
+                    "We work as an extension of your team, building long-term relationships based on trust and mutual success.",
+                  icon: <FaHandshake />,
+                },
+              ].map((value, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-4xl mb-4">{value.icon}</div>
+                  <h4 className="text-xl font-semibold text-black mb-3">
+                    {value.title}
+                  </h4>
+                  <p className="text-gray-600 leading-relaxed">
+                    {value.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
-          </main>
+          </motion.div>
         </div>
       </div>
 
       {/* Portfolio Section */}
-      <div ref={containerRef} className="bg-white text-black min-h-screen">
+      <div
+        id="portfolio"
+        ref={containerRef}
+        className="bg-white text-black min-h-screen"
+      >
         <div className="max-w-7xl mx-auto px-8 py-16">
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <h2 className="text-6xl md:text-8xl font-bold text-black mb-6">
@@ -203,7 +455,7 @@ function Home() {
               className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
               {[
@@ -217,7 +469,7 @@ function Home() {
                   className="text-center"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                   viewport={{ once: true }}
                 >
                   <div className="text-3xl md:text-4xl font-bold text-black mb-2">
@@ -249,7 +501,7 @@ function Home() {
                   className="flex-1 space-y-8"
                   initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
                 >
                   <div className="inline-block">
@@ -280,7 +532,7 @@ function Home() {
                               initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               transition={{
-                                duration: 0.5,
+                                duration: 0.6,
                                 delay: 0.6 + idx * 0.1,
                               }}
                               viewport={{ once: true }}
@@ -326,7 +578,7 @@ function Home() {
                   className="flex-1 w-full"
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
                   <div className="relative">
@@ -335,7 +587,7 @@ function Home() {
                       className="absolute -top-4 -left-4 z-10 w-16 h-16 bg-black text-white rounded-full flex items-center justify-center font-bold text-xl"
                       initial={{ scale: 0, rotate: -180 }}
                       whileInView={{ scale: 1, rotate: 0 }}
-                      transition={{ duration: 0.8, delay: 0.8 }}
+                      transition={{ duration: 0.6, delay: 0.8 }}
                       viewport={{ once: true }}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -370,13 +622,13 @@ function Home() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="bg-gray-50 text-black py-20">
+      <div id="testimonials" className="bg-gray-50 text-black py-20">
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
@@ -428,7 +680,7 @@ function Home() {
                 className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
                 <div className="flex items-center mb-4">
@@ -460,13 +712,13 @@ function Home() {
       </div>
 
       {/* Technologies Section */}
-      <div className="bg-black text-white py-20">
+      <div id="technologies" className="bg-black text-white py-20">
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
@@ -529,7 +781,7 @@ function Home() {
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-white text-black py-20">
+      <div id="contact" className="bg-white text-black py-20">
         <div className="max-w-4xl mx-auto px-8">
           <motion.div
             className="text-center mb-16"
