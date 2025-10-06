@@ -25,7 +25,7 @@ import {
 } from "react-icons/si";
 import { GiArtificialIntelligence } from "react-icons/gi";
 const digitalCraftersLogo = "/digital_crafters.webp";
-const renderVideo = "/3d.mp4";
+const heroVideo = "/hero.mp4";
 import Image from "next/image";
 
 const contactFormSchema = z.object({
@@ -286,7 +286,7 @@ function Home() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "brightness(0.8)" }}
         >
-          <source src={renderVideo} type="video/mp4" />
+          <source src={heroVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute sm:w-3/4 w-full text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl flex flex-col gap-4 items-center">
