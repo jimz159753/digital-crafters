@@ -25,7 +25,7 @@ import {
 } from "react-icons/si";
 import { GiArtificialIntelligence } from "react-icons/gi";
 const digitalCraftersLogo = "/digital_crafters.webp";
-const squaresVideo = "/squares.mp4";
+const renderVideo = "/3d.mp4";
 import Image from "next/image";
 
 const contactFormSchema = z.object({
@@ -108,52 +108,77 @@ function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbar = document.querySelector("[data-navbar]") as HTMLElement;
+      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Approximate navbar height
+
+      const elementRect = element.getBoundingClientRect().top;
+      const offset = elementRect + window.pageYOffset - navbarHeight;
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: Math.max(0, offset),
+          behavior: "smooth",
+        });
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
+      <nav
+        data-navbar
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200"
+      >
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Image
                 src={digitalCraftersLogo}
                 alt="Digital Crafters"
-                height={200}
-                width={200}
+                height={180}
+                width={180}
               />
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="#about"
+              <button
+                onClick={(e) => scrollToSection(e, "about")}
                 className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
                 About
-              </a>
-              <a
-                href="#portfolio"
+              </button>
+              <button
+                onClick={(e) => scrollToSection(e, "portfolio")}
                 className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
                 Portfolio
-              </a>
-              <a
-                href="#testimonials"
+              </button>
+              <button
+                onClick={(e) => scrollToSection(e, "testimonials")}
                 className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
                 Testimonials
-              </a>
-              <a
-                href="#technologies"
+              </button>
+              <button
+                onClick={(e) => scrollToSection(e, "technologies")}
                 className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
                 Technologies
-              </a>
-              <a
-                href="#contact"
+              </button>
+              <button
+                onClick={(e) => scrollToSection(e, "contact")}
                 className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
               >
                 Contact
-              </a>
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -201,56 +226,51 @@ function Home() {
                 exit={{ y: -20 }}
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
-                <motion.a
-                  href="#about"
-                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <motion.button
+                  onClick={(e) => scrollToSection(e, "about")}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.2 }}
                 >
                   About
-                </motion.a>
-                <motion.a
-                  href="#portfolio"
-                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => scrollToSection(e, "portfolio")}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.25 }}
                 >
                   Portfolio
-                </motion.a>
-                <motion.a
-                  href="#testimonials"
-                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => scrollToSection(e, "testimonials")}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.3 }}
                 >
                   Testimonials
-                </motion.a>
-                <motion.a
-                  href="#technologies"
-                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => scrollToSection(e, "technologies")}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.35 }}
                 >
                   Technologies
-                </motion.a>
-                <motion.a
-                  href="#contact"
-                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                </motion.button>
+                <motion.button
+                  onClick={(e) => scrollToSection(e, "contact")}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.4 }}
                 >
                   Contact
-                </motion.a>
+                </motion.button>
               </motion.div>
             </motion.div>
           )}
@@ -264,25 +284,25 @@ function Home() {
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: "brightness(0.2)" }}
+          style={{ filter: "brightness(0.8)" }}
         >
-          <source src={squaresVideo} type="video/mp4" />
+          <source src={renderVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute sm:w-3/4 w-full text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl flex flex-col gap-4 items-center">
           <motion.p
             className="hero-text text-white md:text-6xl text-4xl font-bold"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Scale Business to drive Results
           </motion.p>
           <motion.p
             className="hero-text text-gray-300 sm:text-sm text-base text-center md:w-1/2 w-4/5 font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             Manage all your data and workflows in one place. Automate processes,
             gain insights, and scale your business with ease.
@@ -339,7 +359,7 @@ function Home() {
 
             <motion.div
               className="relative"
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
@@ -376,7 +396,7 @@ function Home() {
           {/* Values Section */}
           <motion.div
             className="mt-20"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
@@ -436,7 +456,7 @@ function Home() {
         <div className="max-w-7xl mx-auto px-8 py-16">
           <motion.div
             className="text-center mb-20"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
@@ -499,7 +519,7 @@ function Home() {
               >
                 <motion.div
                   className="flex-1 space-y-8"
-                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                  initial={{ opacity: 0, x: isEven ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
@@ -553,7 +573,7 @@ function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-black font-semibold text-lg group bg-gray-100 hover:bg-gray-200 px-6 py-3 rounded-full transition-all duration-300"
-                    whileHover={{ x: 10, scale: 1.05 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -576,7 +596,7 @@ function Home() {
 
                 <motion.div
                   className="flex-1 w-full"
-                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  initial={{ opacity: 0, x: isEven ? 20 : -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
@@ -626,7 +646,7 @@ function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
