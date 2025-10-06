@@ -25,7 +25,6 @@ build/
 Thumbs.db
 
 # Large media files (over 50MB)
-*.mp4
 *.mov
 *.avi
 *.mkv
