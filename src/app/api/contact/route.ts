@@ -63,11 +63,10 @@ export async function POST(request: NextRequest) {
     `;
 
     const data = await resend.emails.send({
-      from: "Digital Crafters <noreply@digitalcrafters.dev>",
-      to: ["gtzgileta@gmail.com", "luisjc140992@gmail.com"],
+      from: "Digital Crafters <support@digitalcrafters.com.mx>",
+      to: ["support@digitalcrafters.com.mx"], // Only your verified email for now
       subject: `New Contact Form Submission from ${name} (${company})`,
       html: emailHtml,
-      replyTo: email,
     });
 
     // Send confirmation email to the user
@@ -99,7 +98,7 @@ export async function POST(request: NextRequest) {
     `;
 
     await resend.emails.send({
-      from: "Digital Crafters <noreply@digitalcrafters.dev>",
+      from: "Digital Crafters <support@digitalcrafters.com.mx>",
       to: [email],
       subject: "Thank you for contacting Digital Crafters",
       html: confirmationEmailHtml,
