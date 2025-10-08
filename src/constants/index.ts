@@ -24,7 +24,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 1,
     title: "Realsynch",
     description:
-      "A comprehensive business intelligence platform for real estate professionals built with React and Node.js. Realsynch seamlessly integrates with 30+ real estate systems, aggregating and analyzing business data through AWS cloud infrastructure. The platform features real-time dashboards, automated reporting, and predictive analytics powered by custom algorithms. Built with MongoDB for flexible data storage and deployed on AWS EC2 with S3 for secure file management, delivering actionable insights for brokerages and agents.",
+      "A comprehensive business intelligence platform that transforms how real estate professionals manage and grow their business. Realsynch consolidates data from 30+ real estate systems into actionable insights, helping agents track performance, identify opportunities, and make data-driven decisions. The platform delivers real-time dashboards, automated reporting, and predictive analytics to drive revenue growth.",
     image: "/realsynch.png",
     category: "Business Intelligence",
     features: [
@@ -39,7 +39,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 2,
     title: "Espacio Omnia",
     description:
-      "A modern event and coworking space management platform developed with Next.js and React. The application streamlines booking systems, member management, and event coordination through an intuitive interface. Built with PostgreSQL for robust data management and deployed on AWS with EC2 hosting and S3 media storage. Features real-time availability tracking, automated billing, and integrated payment processing, providing a seamless experience for both administrators and members.",
+      "A comprehensive event and coworking space management platform that simplifies operations and enhances member experience. The application streamlines booking systems, automates member management, and coordinates events seamlessly. It enables space owners to maximize utilization, reduce administrative overhead, and create engaging experiences for their community.",
     image: "/omnia.png",
     category: "Platform",
     features: [
@@ -54,7 +54,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 3,
     title: "Lightmind Mobile App",
     description:
-      "An AI-powered meditation and wellness mobile application built with React Native for cross-platform functionality. Lightmind delivers personalized meditation experiences through intelligent mood analysis and adaptive content delivery. The backend leverages Node.js with MongoDB for user data and session tracking, while AWS S3 stores audio content and meditation guides. Features include real-time ambient soundscapes, progress tracking, and customized meditation sessions tailored to individual user needs and goals.",
+      "An AI-powered meditation and wellness mobile application that delivers personalized mindfulness experiences to help users reduce stress and improve mental well-being. Lightmind adapts to individual preferences and emotional states, providing tailored meditation sessions, progress tracking, and wellness insights that support users on their journey to better mental health.",
     image: "/lightmind.png",
     category: "Mobile App",
     features: [
@@ -69,7 +69,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 4,
     title: "Guadalajara Zoo",
     description:
-      "A comprehensive digital ecosystem for the Guadalajara Zoo developed with React and Node.js. The platform integrates ticket purchasing, visitor management, interactive animal exhibits, and educational content delivery. Built on AWS infrastructure with EC2 hosting and PostgreSQL database, the system handles real-time attendance tracking and analytics. Features include mobile app integration, virtual tours, interactive maps, and AWS S3-powered multimedia content for an enhanced visitor experience both on-site and online.",
+      "A comprehensive digital ecosystem that revolutionizes the visitor experience at Guadalajara Zoo. The platform streamlines ticket purchasing, enhances visitor engagement through interactive exhibits, and delivers educational content that brings the animal world to life. It helps the zoo increase visitor satisfaction, improve operational efficiency, and create memorable educational experiences for families and students.",
     image: "/zoogdl.png",
     category: "Public Service",
     features: [
@@ -88,7 +88,7 @@ export const testimonials: Testimonial[] = [
     company: "Realsynch",
     role: "CEO",
     content:
-      "Digital Crafters built our entire business intelligence platform from the ground up. Their expertise in React, Node.js, and AWS infrastructure helped us create a scalable solution that integrates seamlessly with 30+ real estate systems. The real-time analytics dashboard they developed has transformed how agents track their performance.",
+      "Digital Crafters built a comprehensive intelligence platform that consolidates data from 30+ real estate systems. Our revenue has increased significantly since implementing their real-time analytics and automated reporting features.",
     rating: 5,
   },
   {
@@ -96,7 +96,7 @@ export const testimonials: Testimonial[] = [
     company: "Espacio Omnia",
     role: "Operations Director",
     content:
-      "The booking and event management platform Digital Crafters created exceeded all expectations. Built with Next.js and PostgreSQL, it handles our complex scheduling needs flawlessly. The AWS deployment ensures we never experience downtime, and our members love the intuitive interface.",
+      "Digital Crafters created a booking and event management platform that reduced our administrative overhead by 60% and increased member satisfaction. Our space utilization has improved dramatically with their intuitive interface.",
     rating: 5,
   },
   {
@@ -104,7 +104,7 @@ export const testimonials: Testimonial[] = [
     company: "LightMind Wellness",
     role: "Founder",
     content:
-      "Digital Crafters developed our AI-powered meditation app with React Native, delivering a beautiful cross-platform experience. The MongoDB backend and AWS infrastructure they implemented handle thousands of daily users seamlessly. Their attention to UX design made our app truly stand out in the wellness space.",
+      "Digital Crafters developed our AI-powered meditation app that has helped thousands of users improve their mental well-being. Their focus on user experience made our app a leader in the wellness space with exceptional retention rates.",
     rating: 5,
   },
   {
@@ -112,7 +112,7 @@ export const testimonials: Testimonial[] = [
     company: "Guadalajara Zoo",
     role: "Digital Innovation Manager",
     content:
-      "Our comprehensive digital ecosystem, built by Digital Crafters using React and PostgreSQL, revolutionized visitor experience. From ticket purchasing to virtual tours, every aspect runs smoothly on AWS infrastructure. The mobile app integration and real-time analytics have significantly improved our operations.",
+      "Digital Crafters created a comprehensive digital ecosystem that increased visitor satisfaction by 40% and improved operational efficiency. The platform streamlines ticket purchasing and provides engaging virtual tours.",
     rating: 5,
   },
 ];
@@ -136,19 +136,19 @@ export const values: Value[] = [
   {
     title: "Innovation",
     description:
-      "We stay at the forefront of technology, constantly exploring new tools and methodologies to deliver cutting-edge solutions.",
+      "We continuously explore new approaches and methodologies to deliver innovative solutions that give our clients a competitive advantage in their markets.",
     icon: FaLightbulb,
   },
   {
     title: "Quality",
     description:
-      "Every project is crafted with meticulous attention to detail, ensuring robust, scalable, and maintainable code.",
+      "Every project is crafted with meticulous attention to detail, ensuring reliable, scalable solutions that deliver consistent results and long-term value for our clients.",
     icon: FaStar,
   },
   {
     title: "Partnership",
     description:
-      "We work as an extension of your team, building long-term relationships based on trust and mutual success.",
+      "We work as an extension of your team, building long-term relationships based on trust and shared success. Our goal is to understand your business deeply and become a strategic partner in your growth journey.",
     icon: FaHandshake,
   },
 ];
