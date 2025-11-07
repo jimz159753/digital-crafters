@@ -1,23 +1,23 @@
+import { PortfolioProject, Technology, Testimonial, Value } from "@/types";
 import {
-  FaReact,
-  FaNodeJs,
-  FaSass,
   FaAws,
-  FaGoogle,
   FaDigitalOcean,
-  FaStar,
-  FaLightbulb,
+  FaGoogle,
   FaHandshake,
+  FaLightbulb,
+  FaNodeJs,
+  FaReact,
+  FaSass,
+  FaStar,
 } from "react-icons/fa";
+import { GiArtificialIntelligence } from "react-icons/gi";
 import {
-  SiNextdotjs,
-  SiMongodb,
   SiDrizzle,
+  SiMongodb,
+  SiNextdotjs,
   SiPostgresql,
   SiReact,
 } from "react-icons/si";
-import { GiArtificialIntelligence } from "react-icons/gi";
-import { PortfolioProject, Testimonial, Technology, Value } from "@/types";
 
 export const portfolioProjects: PortfolioProject[] = [
   {
@@ -52,21 +52,6 @@ export const portfolioProjects: PortfolioProject[] = [
   },
   {
     id: 3,
-    title: "Lightmind Mobile App",
-    description:
-      "An AI-powered meditation and wellness mobile application that delivers personalized mindfulness experiences to help users reduce stress and improve mental well-being. Lightmind adapts to individual preferences and emotional states, providing tailored meditation sessions, progress tracking, and wellness insights that support users on their journey to better mental health.",
-    image: "/lightmind.png",
-    category: "Mobile App",
-    features: [
-      "React Native",
-      "AI Personalization",
-      "MongoDB Backend",
-      "AWS Media Delivery",
-    ],
-    url: "https://apps.apple.com/us/app/lightmind-tailored-meditation/id1662211527",
-  },
-  {
-    id: 4,
     title: "Guadalajara Zoo",
     description:
       "A comprehensive digital ecosystem that revolutionizes the visitor experience at Guadalajara Zoo. The platform streamlines ticket purchasing, enhances visitor engagement through interactive exhibits, and delivers educational content that brings the animal world to life. It helps the zoo increase visitor satisfaction, improve operational efficiency, and create memorable educational experiences for families and students.",
