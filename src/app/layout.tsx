@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: "Digital Crafters",
   description:
     "Digital Crafters is a web development agency that creates exceptional digital experiences that drive business growth and innovation.",
+  openGraph: {
+    title: "Digital Crafters",
+    description:
+      "Digital Crafters is a web development agency that creates exceptional digital experiences that drive business growth and innovation.",
+    url: "https://digitalcrafters.com.mx",
+    type: "website",
+    images: [
+      {
+        url: "https://digitalcrafters.com.mx/digital_crafters_logo.webp",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

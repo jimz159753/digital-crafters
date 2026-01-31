@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 
 const digitalCraftersLogo = "/digital_crafters.webp";
 
@@ -52,8 +52,8 @@ export default function Navigation() {
             <Image
               src={digitalCraftersLogo}
               alt="Digital Crafters"
-              height={180}
-              width={180}
+              height={40}
+              width={40}
             />
           </div>
 

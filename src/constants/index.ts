@@ -50,21 +50,6 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     url: "https://espacioomnia.com",
   },
-  {
-    id: 3,
-    title: "Guadalajara Zoo",
-    description:
-      "A comprehensive digital ecosystem that revolutionizes the visitor experience at Guadalajara Zoo. The platform streamlines ticket purchasing, enhances visitor engagement through interactive exhibits, and delivers educational content that brings the animal world to life. It helps the zoo increase visitor satisfaction, improve operational efficiency, and create memorable educational experiences for families and students.",
-    image: "/zoogdl.png",
-    category: "Public Service",
-    features: [
-      "React Platform",
-      "AWS Infrastructure",
-      "PostgreSQL Database",
-      "Mobile Integration",
-    ],
-    url: "https://zooguadalajara.com.mx",
-  },
 ];
 
 export const testimonials: Testimonial[] = [
