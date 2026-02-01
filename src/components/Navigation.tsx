@@ -53,7 +53,7 @@ export default function Navigation() {
               src={digitalCraftersLogo}
               alt="Digital Crafters"
               height={40}
-              width={40}
+              width={50}
             />
           </div>
 
