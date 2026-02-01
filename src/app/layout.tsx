@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://digitalcrafters.com.mx/digital_crafters.webp",
+        url: "https://digitalcrafters.com.mx/digital_crafters.png",
         width: 1200,
         height: 630,
       },
