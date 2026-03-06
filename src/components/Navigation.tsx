@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-const digitalCraftersLogo = "/digital_crafters.webp";
+const digitalCraftersLogo = "/digital_crafters_logo.png";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,6 +51,7 @@ export default function Navigation() {
           <div className="flex items-center space-x-2">
             <Image
               src={digitalCraftersLogo}
+              className="rounded-md"
               alt="Digital Crafters"
               height={40}
               width={50}

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Digital Crafters is a web development agency that creates exceptional digital experiences that drive business growth and innovation.",
   icons: {
-    icon: "/digital_crafters.ico",
+    icon: "/digital_crafters_logo.ico",
   },
   openGraph: {
     title: "Digital Crafters",

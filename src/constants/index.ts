@@ -50,6 +50,36 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     url: "https://espacioomnia.com",
   },
+  {
+    id: 3,
+    title: "Sinapz",
+    description:
+      "An all-in-one smart business management platform designed to simplify daily operations for service-based businesses. Sinapz streamlines appointment scheduling, payments, and inventory management with the cleanest and most efficient interface on the market. Built for entrepreneurs who never stop, it empowers beauty salons, barbershops, spas, and more to optimize their workflow and grow their business effortlessly.",
+    image: "/sinapz.png",
+    category: "SaaS Platform",
+    features: [
+      "Next.js Framework",
+      "PostgreSQL Database",
+      "AI-Powered Insights",
+      "Real-time Scheduling",
+    ],
+    url: "https://sinapz.ai",
+  },
+  {
+    id: 4,
+    title: "Portfolio Website",
+    description:
+      "A sleek, dark-themed personal portfolio website designed to showcase development expertise and attract potential clients. Featuring smooth GSAP scroll-driven animations, an interactive process timeline, testimonial carousels, and a fully responsive design. The site highlights services, skills, and technologies with a premium, modern aesthetic that leaves a lasting impression.",
+    image: "/portfolio.png",
+    category: "Portfolio",
+    features: [
+      "React + Vite",
+      "GSAP Animations",
+      "Responsive Design",
+      "GitHub Pages Deployment",
+    ],
+    url: "https://jimz159753.github.io/portfolio-website/",
+  },
 ];
 
 export const testimonials: Testimonial[] = [
