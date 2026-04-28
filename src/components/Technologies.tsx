@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { technologies } from "@/constants";
+import { useI18n } from "@/i18n";
 
 export default function Technologies() {
+  const { t } = useI18n();
+
   return (
     <div id="technologies" className="bg-black text-white py-20">
       <div className="max-w-7xl mx-auto px-8">
@@ -15,11 +18,10 @@ export default function Technologies() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Technologies We Use
+            {t.technologies.title}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            We work with cutting-edge technologies to deliver modern, scalable,
-            and efficient solutions for your business needs.
+            {t.technologies.subtitle}
           </p>
         </motion.div>
 

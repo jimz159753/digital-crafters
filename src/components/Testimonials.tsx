@@ -2,8 +2,30 @@
 
 import { motion } from "framer-motion";
 import { testimonials } from "@/constants";
+import { useI18n } from "@/i18n";
 
 export default function Testimonials() {
+  const { t } = useI18n();
+
+  const translatedTestimonials = testimonials.map((item) => {
+    const contentMap: Record<string, string> = {
+      Realsynch: t.testimonials.realsynchContent,
+      "Espacio Omnia": t.testimonials.omniaContent,
+      "LightMind Wellness": t.testimonials.lightmindContent,
+      "Guadalajara Zoo": t.testimonials.zooContent,
+    };
+    const roleMap: Record<string, string> = {
+      "Operations Director": t.testimonials.roleOperationsDirector,
+      Founder: t.testimonials.roleFounder,
+      "Digital Innovation Manager": t.testimonials.roleDigitalInnovation,
+    };
+    return {
+      ...item,
+      content: contentMap[item.company] ?? item.content,
+      role: roleMap[item.role] ?? item.role,
+    };
+  });
+
   return (
     <div id="testimonials" className="bg-gray-50 text-black py-20">
       <div className="max-w-7xl mx-auto px-8">
@@ -15,16 +37,15 @@ export default function Testimonials() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
-            What Our Clients Say
+            {t.testimonials.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our clients
-            have to say about their experience working with Digital Crafters.
+            {t.testimonials.subtitle}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {translatedTestimonials.map((testimonial, index) => (
             <motion.div
               key={index}
               className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
@@ -48,9 +69,12 @@ export default function Testimonials() {
                 &ldquo;{testimonial.content}&rdquo;
               </p>
               <div>
-                <h4 className="font-semibold text-black">{testimonial.name}</h4>
+                <h4 className="font-semibold text-black">
+                  {testimonial.name}
+                </h4>
                 <p className="text-gray-600 text-sm">
-                  {testimonial.role} at {testimonial.company}
+                  {testimonial.role} {t.testimonials.roleAt}{" "}
+                  {testimonial.company}
                 </p>
               </div>
             </motion.div>

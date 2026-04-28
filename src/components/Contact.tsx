@@ -1,26 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { ContactFormData } from "@/types";
-
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  company: z.string().min(2, "Company name must be at least 2 characters"),
-  field: z.string().min(2, "Field must be at least 2 characters"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  captcha: z
-    .boolean()
-    .refine((val) => val === true, "Please verify you are not a robot"),
-});
+import { useI18n } from "@/i18n";
 
 function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { t } = useI18n();
+
+  const contactFormSchema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, t.contact.validationName),
+        email: z.string().email(t.contact.validationEmail),
+        company: z.string().min(2, t.contact.validationCompany),
+        field: z.string().min(2, t.contact.validationField),
+        description: z.string().min(10, t.contact.validationDescription),
+        captcha: z
+          .boolean()
+          .refine((val) => val === true, t.contact.validationCaptcha),
+      }),
+    [t]
+  );
 
   const {
     register,
@@ -50,7 +56,7 @@ function ContactForm() {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("There was an error submitting your form. Please try again.");
+      alert(t.contact.errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -79,16 +85,15 @@ function ContactForm() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">Thank You!</h3>
-        <p className="text-gray-600 mb-6">
-          Your message has been sent successfully. We&apos;ll get back to you
-          within 24 hours.
-        </p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          {t.contact.thankYou}
+        </h3>
+        <p className="text-gray-600 mb-6">{t.contact.successMessage}</p>
         <button
           onClick={() => setIsSubmitted(false)}
           className="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
         >
-          Send Another Message
+          {t.contact.sendAnother}
         </button>
       </motion.div>
     );
@@ -109,14 +114,14 @@ function ContactForm() {
             htmlFor="name"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Full Name *
+            {t.contact.fullName} *
           </label>
           <input
             {...register("name")}
             type="text"
             id="name"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-            placeholder="Your full name"
+            placeholder={t.contact.fullNamePlaceholder}
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -128,14 +133,14 @@ function ContactForm() {
             htmlFor="email"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Email Address *
+            {t.contact.email} *
           </label>
           <input
             {...register("email")}
             type="email"
             id="email"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-            placeholder="your.email@company.com"
+            placeholder={t.contact.emailPlaceholder}
           />
           {errors.email && (
             <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -149,14 +154,14 @@ function ContactForm() {
             htmlFor="company"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Company Name *
+            {t.contact.company} *
           </label>
           <input
             {...register("company")}
             type="text"
             id="company"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-            placeholder="Your company name"
+            placeholder={t.contact.companyPlaceholder}
           />
           {errors.company && (
             <p className="mt-1 text-sm text-red-600">
@@ -170,14 +175,14 @@ function ContactForm() {
             htmlFor="field"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Industry/Field *
+            {t.contact.field} *
           </label>
           <input
             {...register("field")}
             type="text"
             id="field"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-            placeholder="e.g., Technology, Healthcare, Finance"
+            placeholder={t.contact.fieldPlaceholder}
           />
           {errors.field && (
             <p className="mt-1 text-sm text-red-600">{errors.field.message}</p>
@@ -190,14 +195,14 @@ function ContactForm() {
           htmlFor="description"
           className="block text-sm font-medium text-gray-700 mb-2"
         >
-          Project Description *
+          {t.contact.description} *
         </label>
         <textarea
           {...register("description")}
           id="description"
           rows={6}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
-          placeholder="Tell us about your project, goals, and how we can help you..."
+          placeholder={t.contact.descriptionPlaceholder}
         />
         {errors.description && (
           <p className="mt-1 text-sm text-red-600">
@@ -214,7 +219,7 @@ function ContactForm() {
           className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
         />
         <label htmlFor="captcha" className="ml-2 block text-sm text-gray-700">
-          I&apos;m not a robot *
+          {t.contact.captcha} *
         </label>
         {errors.captcha && (
           <p className="ml-2 text-sm text-red-600">{errors.captcha.message}</p>
@@ -250,10 +255,10 @@ function ContactForm() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            Sending Message...
+            {t.contact.sending}
           </>
         ) : (
-          "Send Message"
+          t.contact.sendMessage
         )}
       </motion.button>
     </motion.form>
@@ -261,6 +266,8 @@ function ContactForm() {
 }
 
 export default function Contact() {
+  const { t } = useI18n();
+
   return (
     <div id="contact" className="bg-white text-black py-20">
       <div className="max-w-4xl mx-auto px-8">
@@ -272,11 +279,10 @@ export default function Contact() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
-            Let&apos;s Work Together
+            {t.contact.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to bring your ideas to life? Get in touch with us and
-            let&apos;s discuss how we can help you achieve your goals.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 

@@ -1,13 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { portfolioProjects, stats } from "@/constants";
+import { portfolioProjects } from "@/constants";
+import { useI18n } from "@/i18n";
 
 interface PortfolioProps {
   containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function Portfolio({ containerRef }: PortfolioProps) {
+  const { t } = useI18n();
+
+  const translatedStats = [
+    { number: "25+", label: t.portfolio.statsProjects },
+    { number: "25+", label: t.portfolio.statsClients },
+    { number: "100%", label: t.portfolio.statsSuccess },
+    { number: "12+", label: t.portfolio.statsTech },
+  ];
+
+  const translatedProjects = portfolioProjects.map((project) => {
+    const descMap: Record<string, string> = {
+      Realsynch: t.portfolio.realsynchDesc,
+      "Espacio Omnia": t.portfolio.omniaDesc,
+      Sinapz: t.portfolio.sinapzDesc,
+      "Portfolio Website": t.portfolio.portfolioDesc,
+    };
+    const categoryMap: Record<string, string> = {
+      Realsynch: t.portfolio.realsynchCategory,
+      "Espacio Omnia": t.portfolio.omniaCategory,
+      Sinapz: t.portfolio.sinapzCategory,
+      "Portfolio Website": t.portfolio.portfolioCategory,
+    };
+    const titleMap: Record<string, string> = {
+      "Portfolio Website": t.portfolio.portfolioTitle,
+    };
+    return {
+      ...project,
+      description: descMap[project.title] ?? project.description,
+      category: categoryMap[project.title] ?? project.category,
+      title: titleMap[project.title] ?? project.title,
+    };
+  });
+
   return (
     <div
       id="portfolio"
@@ -23,12 +57,10 @@ export default function Portfolio({ containerRef }: PortfolioProps) {
           viewport={{ once: true }}
         >
           <h2 className="text-6xl md:text-8xl font-bold text-black mb-6">
-            Our Work
+            {t.portfolio.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-            Discover our latest projects and see how we bring ideas to life
-            through innovative design and technology. Each project represents
-            our commitment to excellence and creative problem-solving.
+            {t.portfolio.subtitle}
           </p>
 
           {/* Stats */}
@@ -39,7 +71,7 @@ export default function Portfolio({ containerRef }: PortfolioProps) {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            {stats.map((stat, index) => (
+            {translatedStats.map((stat, index) => (
               <motion.div
                 key={index}
                 className="text-center"
@@ -59,7 +91,7 @@ export default function Portfolio({ containerRef }: PortfolioProps) {
           </motion.div>
         </motion.div>
 
-        {portfolioProjects.map((project, index) => {
+        {translatedProjects.map((project, index) => {
           const isEven = index % 2 === 0;
 
           return (
@@ -98,7 +130,7 @@ export default function Portfolio({ containerRef }: PortfolioProps) {
                   {project.features && (
                     <div className="space-y-3">
                       <h4 className="text-lg font-semibold text-black">
-                        Key Features:
+                        {t.portfolio.keyFeatures}
                       </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {project.features.map((feature, idx) => (
@@ -133,7 +165,7 @@ export default function Portfolio({ containerRef }: PortfolioProps) {
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                 >
-                  View Project Site
+                  {t.portfolio.viewProject}
                   <svg
                     className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                     fill="none"

@@ -1,10 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useI18n } from "@/i18n";
 
 const heroVideo = "/hero.mp4";
 
 export default function Hero() {
+  const { t } = useI18n();
+
   return (
     <div id="home" className="min-h-screen bg-gray-100 p-8 relative pt-24">
       <video
@@ -25,7 +28,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Scale Business to drive Results
+          {t.hero.title}
         </motion.p>
         <motion.p
           className="hero-text text-gray-300 sm:text-sm text-base text-center md:w-1/2 w-4/5 font-medium"
@@ -33,8 +36,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Manage all your data and workflows in one place. Automate processes,
-          gain insights, and scale your business with ease.
+          {t.hero.subtitle}
         </motion.p>
       </div>
     </div>

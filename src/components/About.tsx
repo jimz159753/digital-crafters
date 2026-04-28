@@ -1,9 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useI18n } from "@/i18n";
 import { values } from "@/constants";
 
 export default function About() {
+  const { t } = useI18n();
+
+  const translatedValues = [
+    {
+      ...values[0],
+      title: t.about.valueInnovation,
+      description: t.about.valueInnovationDesc,
+    },
+    {
+      ...values[1],
+      title: t.about.valueQuality,
+      description: t.about.valueQualityDesc,
+    },
+    {
+      ...values[2],
+      title: t.about.valuePartnership,
+      description: t.about.valuePartnershipDesc,
+    },
+  ];
+
   return (
     <div id="about" className="bg-white text-black py-20">
       <div className="max-w-7xl mx-auto px-8">
@@ -15,12 +36,10 @@ export default function About() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl md:text-7xl font-bold text-black mb-6">
-            About Digital Crafters
+            {t.about.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are a team of passionate developers and designers dedicated to
-            creating exceptional digital experiences that drive business growth
-            and innovation.
+            {t.about.subtitle}
           </p>
         </motion.div>
 
@@ -32,21 +51,14 @@ export default function About() {
             viewport={{ once: true }}
           >
             <h3 className="text-3xl md:text-4xl font-bold text-black mb-6">
-              Crafting Digital Excellence
+              {t.about.craftingTitle}
             </h3>
             <div className="space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed">
-                At Digital Crafters, we believe in the power of technology to
-                transform businesses. Our team combines technical expertise with
-                creative vision to deliver solutions that not only meet your
-                needs but exceed your expectations.
+                {t.about.craftingP1}
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                From concept to deployment, we work closely with our clients to
-                understand their unique challenges and create tailored solutions
-                that drive real results. Our commitment to quality and
-                innovation has helped businesses across various industries scale
-                and succeed in the digital landscape.
+                {t.about.craftingP2}
               </p>
             </div>
           </motion.div>
@@ -76,12 +88,9 @@ export default function About() {
                   </svg>
                 </div>
                 <h4 className="text-xl font-semibold text-black mb-2">
-                  Our Mission
+                  {t.about.missionTitle}
                 </h4>
-                <p className="text-gray-600">
-                  To empower businesses through innovative technology solutions
-                  that drive growth and success.
-                </p>
+                <p className="text-gray-600">{t.about.missionDescription}</p>
               </div>
             </div>
           </motion.div>
@@ -96,10 +105,10 @@ export default function About() {
           viewport={{ once: true }}
         >
           <h3 className="text-3xl md:text-4xl font-bold text-black text-center mb-12">
-            Our Core Values
+            {t.about.valuesTitle}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
+            {translatedValues.map((value, index) => (
               <motion.div
                 key={index}
                 className="text-center flex flex-col items-center p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors duration-300"

@@ -3,11 +3,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import { useI18n } from "@/i18n";
 
 const digitalCraftersLogo = "/digital_crafters_logo.png";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { locale, t, setLocale } = useI18n();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -22,6 +24,7 @@ export default function Navigation() {
     targetId: string
   ) => {
     e.preventDefault();
+    closeMobileMenu();
     const element = document.getElementById(targetId);
     if (element) {
       // Get the navbar element to calculate its actual height
@@ -41,6 +44,15 @@ export default function Navigation() {
     }
   };
 
+  const navItems = [
+    { id: "about", label: t.nav.about },
+    { id: "services", label: t.nav.services },
+    { id: "portfolio", label: t.nav.portfolio },
+    { id: "testimonials", label: t.nav.testimonials },
+    { id: "technologies", label: t.nav.technologies },
+    { id: "contact", label: t.nav.contact },
+  ];
+
   return (
     <nav
       data-navbar
@@ -59,40 +71,71 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={(e) => handleNavClick(e, "about")}
-              className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
-            >
-              About
-            </button>
-            <button
-              onClick={(e) => handleNavClick(e, "portfolio")}
-              className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={(e) => handleNavClick(e, "testimonials")}
-              className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
-            >
-              Testimonials
-            </button>
-            <button
-              onClick={(e) => handleNavClick(e, "technologies")}
-              className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
-            >
-              Technologies
-            </button>
-            <button
-              onClick={(e) => handleNavClick(e, "contact")}
-              className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
-            >
-              Contact
-            </button>
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className="text-gray-600 hover:text-black transition-colors duration-300 font-medium"
+              >
+                {item.label}
+              </button>
+            ))}
+
+            {/* Language Toggle */}
+            <div className="flex items-center rounded-full border border-gray-300 overflow-hidden text-sm font-semibold">
+              <button
+                onClick={() => setLocale("en")}
+                className={`px-3 py-1.5 transition-all duration-300 ${
+                  locale === "en"
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-500 hover:text-black"
+                }`}
+                aria-label="English"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLocale("es")}
+                className={`px-3 py-1.5 transition-all duration-300 ${
+                  locale === "es"
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-500 hover:text-black"
+                }`}
+                aria-label="Español"
+              >
+                ES
+              </button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-3">
+            {/* Mobile Language Toggle */}
+            <div className="flex items-center rounded-full border border-gray-300 overflow-hidden text-sm font-semibold">
+              <button
+                onClick={() => setLocale("en")}
+                className={`px-2.5 py-1.5 transition-all duration-300 ${
+                  locale === "en"
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-500 hover:text-black"
+                }`}
+                aria-label="English"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLocale("es")}
+                className={`px-2.5 py-1.5 transition-all duration-300 ${
+                  locale === "es"
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-500 hover:text-black"
+                }`}
+                aria-label="Español"
+              >
+                ES
+              </button>
+            </div>
+
             <button
               onClick={toggleMobileMenu}
               className="text-gray-600 hover:text-black transition-colors duration-300"
@@ -136,51 +179,18 @@ export default function Navigation() {
               exit={{ y: -20 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <motion.button
-                onClick={(e) => handleNavClick(e, "about")}
-                className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.2 }}
-              >
-                About
-              </motion.button>
-              <motion.button
-                onClick={(e) => handleNavClick(e, "portfolio")}
-                className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.25 }}
-              >
-                Portfolio
-              </motion.button>
-              <motion.button
-                onClick={(e) => handleNavClick(e, "testimonials")}
-                className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.3 }}
-              >
-                Testimonials
-              </motion.button>
-              <motion.button
-                onClick={(e) => handleNavClick(e, "technologies")}
-                className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.35 }}
-              >
-                Technologies
-              </motion.button>
-              <motion.button
-                onClick={(e) => handleNavClick(e, "contact")}
-                className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.4 }}
-              >
-                Contact
-              </motion.button>
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.id}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className="block text-gray-600 hover:text-black transition-colors duration-300 font-medium py-2 w-full text-left"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: 0.2 + index * 0.05 }}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
             </motion.div>
           </motion.div>
         )}

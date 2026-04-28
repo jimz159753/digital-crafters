@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
 import Technologies from "@/components/Technologies";
@@ -17,6 +18,7 @@ function Home() {
       <Navigation />
       <Hero />
       <About />
+      <Services />
       <Portfolio containerRef={containerRef} />
       <Testimonials />
       <Technologies />
