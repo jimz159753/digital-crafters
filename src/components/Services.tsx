@@ -114,11 +114,11 @@ export default function Services() {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="group relative bg-white rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-gray-100"
+              className="group relative bg-white rounded-2xl p-8 transition-shadow duration-500 border border-gray-100 will-change-transform [@media(hover:hover)]:hover:shadow-2xl [@media(hover:hover)]:hover:-translate-y-2"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
             >
               {/* Gradient accent line at top */}
               <div
