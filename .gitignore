@@ -24,14 +24,15 @@ build/
 .DS_Store
 Thumbs.db
 
-# Large media files (over 50MB)
+# Large media files
 *.mov
 *.avi
 *.mkv
 *.webm
 
-# Keep specific video files that are under size limit
+# Keep specific video files
 !public/hero.mp4
+!public/videos/*.mp4
 
 # Logs
 logs

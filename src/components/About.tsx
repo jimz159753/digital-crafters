@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useI18n } from "@/i18n";
 
 const VIDEOS = [
-  { src: "/videos/1.mov", label: "Video 1" },
-  { src: "/videos/2.mov", label: "Video 2" },
+  { src: "/videos/1.mp4", label: "Video 1" },
+  { src: "/videos/2.mp4", label: "Video 2" },
 ];
 
 function PhoneMockup({
