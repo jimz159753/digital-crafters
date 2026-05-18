@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { useI18n } from "@/i18n";
 
 const VIDEOS = [
@@ -9,13 +8,7 @@ const VIDEOS = [
   { src: "/videos/2.mp4", label: "Video 2" },
 ];
 
-function PhoneMockup({
-  src,
-  onExpand,
-}: {
-  src: string;
-  onExpand: () => void;
-}) {
+function PhoneMockup({ src }: { src: string }) {
   return (
     <div className="relative flex-shrink-0">
       {/* Side volume buttons */}
@@ -24,7 +17,7 @@ function PhoneMockup({
       <div className="absolute -left-[3px] top-36 sm:top-48 w-[3px] h-8 sm:h-10 bg-white/10 rounded-l-sm" />
       <div className="absolute -right-[3px] top-28 sm:top-36 w-[3px] h-10 sm:h-14 bg-white/10 rounded-r-sm" />
 
-      {/* Phone shell — box-shadow border avoids pixelation from rotation */}
+      {/* Phone shell */}
       <div
         className="w-[175px] sm:w-[220px] lg:w-[260px] bg-[#0d0d0d] rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] p-1.5 sm:p-2"
         style={{
@@ -48,17 +41,6 @@ function PhoneMockup({
             playsInline
             className="w-full h-[320px] sm:h-[400px] lg:h-[480px] object-cover"
           />
-
-          {/* Expand button */}
-          <button
-            onClick={onExpand}
-            className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 hover:bg-black/80 hover:border-white/40 transition-all duration-200 group"
-            aria-label="Ver video completo"
-          >
-            <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white/70 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
-            </svg>
-          </button>
         </div>
 
         {/* Home indicator */}
@@ -70,55 +52,8 @@ function PhoneMockup({
   );
 }
 
-function VideoModal({ src, onClose }: { src: string; onClose: () => void }) {
-  return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      onClick={onClose}
-    >
-      <motion.div
-        className="relative max-h-[90vh]"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <video
-          src={src}
-          controls
-          autoPlay
-          className="max-h-[85vh] max-w-[90vw] rounded-2xl shadow-2xl shadow-black/60"
-          style={{ aspectRatio: "9/16" }}
-        />
-
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-4 -right-4 w-10 h-10 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm"
-          aria-label="Cerrar"
-        >
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </motion.div>
-
-      {/* Click outside hint */}
-      <p className="absolute bottom-6 text-white/20 text-xs tracking-widest uppercase select-none">
-        Click fuera para cerrar
-      </p>
-    </motion.div>
-  );
-}
-
 export default function About() {
   const { t } = useI18n();
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
     <div id="about" className="bg-[#0c0c0c] py-24 relative overflow-hidden">
@@ -213,22 +148,22 @@ export default function About() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-            <a
-              href="https://www.tiktok.com/@digital.crafters3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/[0.10] bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/20 transition-all duration-300 group"
-            >
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" />
-              </svg>
-              <span className="text-white/70 text-sm font-medium group-hover:text-white transition-colors duration-300">
-                @digital.crafters3
-              </span>
-              <svg className="w-4 h-4 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
+              <a
+                href="https://www.tiktok.com/@digital.crafters3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/[0.10] bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/20 transition-all duration-300 group"
+              >
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" />
+                </svg>
+                <span className="text-white/70 text-sm font-medium group-hover:text-white transition-colors duration-300">
+                  @digital.crafters3
+                </span>
+                <svg className="w-4 h-4 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -241,28 +176,15 @@ export default function About() {
             viewport={{ once: true }}
           >
             <div className="relative z-20" style={{ transform: "rotate(-6deg) translateY(16px)", willChange: "transform" }}>
-              <PhoneMockup
-                src={VIDEOS[0].src}
-                onExpand={() => setActiveVideo(VIDEOS[0].src)}
-              />
+              <PhoneMockup src={VIDEOS[0].src} />
             </div>
             <div className="relative z-10 -ml-4 sm:-ml-5 lg:-ml-6" style={{ transform: "rotate(5deg)", willChange: "transform" }}>
-              <PhoneMockup
-                src={VIDEOS[1].src}
-                onExpand={() => setActiveVideo(VIDEOS[1].src)}
-              />
+              <PhoneMockup src={VIDEOS[1].src} />
             </div>
           </motion.div>
         </motion.div>
 
       </div>
-
-      {/* Video modal */}
-      <AnimatePresence>
-        {activeVideo && (
-          <VideoModal src={activeVideo} onClose={() => setActiveVideo(null)} />
-        )}
-      </AnimatePresence>
     </div>
   );
 }
