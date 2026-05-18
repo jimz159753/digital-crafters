@@ -22,18 +22,18 @@ import {
 export const portfolioProjects: PortfolioProject[] = [
   {
     id: 1,
-    title: "Realsynch",
+    title: "Crealidad",
     description:
-      "A comprehensive business intelligence platform that transforms how real estate professionals manage and grow their business. Realsynch consolidates data from 30+ real estate systems into actionable insights, helping agents track performance, identify opportunities, and make data-driven decisions. The platform delivers real-time dashboards, automated reporting, and predictive analytics to drive revenue growth.",
-    image: "/realsynch.png",
-    category: "Business Intelligence",
+      "A transformative digital wellness platform dedicated to healing through sound and breathing. Crealidad connects users with immersive therapeutic experiences that combine sound frequencies, guided breathing sessions, and mindfulness practices. The platform empowers individuals to achieve deep relaxation, stress relief, and personal transformation through an accessible and beautifully designed interface.",
+    image: "/crealidad.png",
+    category: "Wellness Platform",
     features: [
-      "React Dashboard",
-      "AWS Cloud Infrastructure",
-      "MongoDB Integration",
-      "Real-time Analytics",
+      "Next.js Framework",
+      "Sound Therapy Integration",
+      "Guided Breathing Sessions",
+      "Mobile Responsive Design",
     ],
-    url: "https://realsynch.com",
+    url: "https://ser-crealidad.com",
   },
   {
     id: 2,
@@ -84,11 +84,11 @@ export const portfolioProjects: PortfolioProject[] = [
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Scott Wilson",
-    company: "Realsynch",
-    role: "CEO",
+    name: "Daniel Herrera",
+    company: "Crealidad",
+    role: "Founder",
     content:
-      "Digital Crafters built a comprehensive intelligence platform that consolidates data from 30+ real estate systems. Our revenue has increased significantly since implementing their real-time analytics and automated reporting features.",
+      "Digital Crafters translated our wellness vision into a beautiful, immersive platform. Our community has grown exponentially since launch and users consistently praise the seamless experience and stunning interface they built for us.",
     rating: 5,
   },
   {

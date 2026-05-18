@@ -16,13 +16,12 @@ const es: TranslationKeys = {
     title: "Escala tu negocio para impulsar resultados",
     subtitle:
       "Gestiona todos tus datos y flujos de trabajo en un solo lugar. Automatiza procesos, obtén información valiosa y escala tu negocio con facilidad.",
+    ctaButton: "Ver Nuestro Trabajo",
   },
 
   // Nosotros
   about: {
     title: "Sobre Digital Crafters",
-    subtitle:
-      "Somos un equipo de desarrolladores y diseñadores apasionados dedicados a crear experiencias digitales excepcionales que impulsan el crecimiento y la innovación empresarial.",
     craftingTitle: "Creando Excelencia Digital",
     craftingP1:
       "En Digital Crafters, creemos en el poder de la tecnología para transformar negocios. Nuestro equipo combina experiencia técnica con visión creativa para entregar soluciones que no solo cumplen tus necesidades, sino que superan tus expectativas.",
@@ -31,7 +30,9 @@ const es: TranslationKeys = {
     missionTitle: "Nuestra Misión",
     missionDescription:
       "Empoderar negocios a través de soluciones tecnológicas innovadoras que impulsan el crecimiento y el éxito.",
-    valuesTitle: "Nuestros Valores",
+    valuesTitle: "Síguenos en nuestras redes",
+    socialDesc:
+      "Más de 25 marcas ya confían en nosotros — y lo están contando en sus redes. Resultados reales, personas reales. Síguenos y descubre por qué nuestros clientes se convierten en nuestros mejores embajadores.",
     valueInnovation: "Innovación",
     valueInnovationDesc:
       "Exploramos continuamente nuevos enfoques y metodologías para entregar soluciones innovadoras que den a nuestros clientes una ventaja competitiva en sus mercados.",
@@ -47,8 +48,6 @@ const es: TranslationKeys = {
   services: {
     sectionTag: "Lo Que Hacemos",
     title: "Nuestros Servicios",
-    subtitle:
-      "Creamos productos digitales que resuelven problemas reales. Desde páginas de aterrizaje impactantes hasta plataformas complejas — hacemos realidad tu visión.",
     landingPages: "Páginas Publicitarias",
     landingPagesDesc:
       "Páginas de aterrizaje de alta conversión diseñadas para cautivar a tu audiencia y maximizar resultados. Perfectas para lanzamientos de productos, campañas de marketing y generación de leads.",
@@ -91,8 +90,6 @@ const es: TranslationKeys = {
   // Portafolio
   portfolio: {
     title: "Nuestro Trabajo",
-    subtitle:
-      "Descubre nuestros últimos proyectos y mira cómo damos vida a las ideas a través del diseño innovador y la tecnología. Cada proyecto representa nuestro compromiso con la excelencia y la resolución creativa de problemas.",
     keyFeatures: "Características clave:",
     viewProject: "Ver Sitio del Proyecto",
     statsProjects: "Proyectos Completados",
@@ -100,9 +97,9 @@ const es: TranslationKeys = {
     statsSuccess: "Tasa de Éxito",
     statsTech: "Tecnologías",
     // Descripciones de proyectos
-    realsynchDesc:
-      "Una plataforma integral de inteligencia de negocios que transforma la manera en que los profesionales inmobiliarios gestionan y hacen crecer su negocio. Realsynch consolida datos de más de 30 sistemas inmobiliarios en información accionable, ayudando a los agentes a rastrear rendimiento, identificar oportunidades y tomar decisiones basadas en datos. La plataforma ofrece dashboards en tiempo real, reportes automatizados y analítica predictiva para impulsar el crecimiento de ingresos.",
-    realsynchCategory: "Inteligencia de Negocios",
+    crealidadDesc:
+      "Una plataforma digital de bienestar transformadora dedicada a la sanación a través del sonido y la respiración. Crealidad conecta a los usuarios con experiencias terapéuticas inmersivas que combinan frecuencias sonoras, sesiones guiadas de respiración y prácticas de mindfulness. La plataforma empodera a las personas para alcanzar relajación profunda, alivio del estrés y transformación personal a través de una interfaz accesible y bellamente diseñada.",
+    crealidadCategory: "Plataforma de Bienestar",
     omniaDesc:
       "Una plataforma integral de gestión de eventos y espacios de coworking que simplifica las operaciones y mejora la experiencia de los miembros. La aplicación optimiza los sistemas de reservas, automatiza la gestión de miembros y coordina eventos de manera fluida. Permite a los propietarios de espacios maximizar la utilización, reducir la carga administrativa y crear experiencias atractivas para su comunidad.",
     omniaCategory: "Plataforma",
@@ -118,12 +115,10 @@ const es: TranslationKeys = {
   // Testimonios
   testimonials: {
     title: "Lo Que Dicen Nuestros Clientes",
-    subtitle:
-      "No solo confíes en nuestra palabra. Esto es lo que nuestros clientes tienen que decir sobre su experiencia trabajando con Digital Crafters.",
     roleAt: "en",
     // Contenido de testimonios
-    realsynchContent:
-      "Digital Crafters construyó una plataforma integral de inteligencia que consolida datos de más de 30 sistemas inmobiliarios. Nuestros ingresos han aumentado significativamente desde que implementamos sus funciones de analítica en tiempo real y reportes automatizados.",
+    crealidadContent:
+      "Digital Crafters tradujo nuestra visión de bienestar en una plataforma hermosa e inmersiva. Nuestra comunidad ha crecido exponencialmente desde el lanzamiento y los usuarios elogian constantemente la experiencia fluida y la impresionante interfaz que construyeron para nosotros.",
     omniaContent:
       "Digital Crafters creó una plataforma de gestión de reservas y eventos que redujo nuestra carga administrativa en un 60% y aumentó la satisfacción de los miembros. La utilización de nuestro espacio ha mejorado drásticamente con su interfaz intuitiva.",
     lightmindContent:
@@ -176,6 +171,12 @@ const es: TranslationKeys = {
     validationDescription:
       "La descripción debe tener al menos 10 caracteres",
     validationCaptcha: "Por favor verifica que no eres un robot",
+    featureFast: "Respuesta rápida",
+    featureTailored: "Soluciones a medida",
+    featureSatisfaction: "100% satisfacción",
+    availability: "Disponibles para nuevos proyectos",
+    formTitle: "Envíanos un mensaje",
+    formSubtitle: "Te respondemos en menos de 24 horas.",
   },
 };
 

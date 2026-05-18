@@ -14,13 +14,12 @@ const en = {
     title: "Scale Business to drive Results",
     subtitle:
       "Manage all your data and workflows in one place. Automate processes, gain insights, and scale your business with ease.",
+    ctaButton: "View Our Work",
   },
 
   // About
   about: {
     title: "About Digital Crafters",
-    subtitle:
-      "We are a team of passionate developers and designers dedicated to creating exceptional digital experiences that drive business growth and innovation.",
     craftingTitle: "Crafting Digital Excellence",
     craftingP1:
       "At Digital Crafters, we believe in the power of technology to transform businesses. Our team combines technical expertise with creative vision to deliver solutions that not only meet your needs but exceed your expectations.",
@@ -29,7 +28,9 @@ const en = {
     missionTitle: "Our Mission",
     missionDescription:
       "To empower businesses through innovative technology solutions that drive growth and success.",
-    valuesTitle: "Our Core Values",
+    valuesTitle: "Follow us on social media",
+    socialDesc:
+      "Over 25 brands have trusted us — and they're sharing it on their socials. Real results, real people. Follow us and see why our clients become our biggest advocates.",
     valueInnovation: "Innovation",
     valueInnovationDesc:
       "We continuously explore new approaches and methodologies to deliver innovative solutions that give our clients a competitive advantage in their markets.",
@@ -45,8 +46,6 @@ const en = {
   services: {
     sectionTag: "What We Do",
     title: "Our Services",
-    subtitle:
-      "We craft digital products that solve real problems. From stunning landing pages to complex platforms — we bring your vision to life.",
     landingPages: "Landing Pages",
     landingPagesDesc:
       "High-converting landing pages designed to captivate your audience and maximize results. Perfect for product launches, marketing campaigns, and lead generation.",
@@ -89,8 +88,6 @@ const en = {
   // Portfolio
   portfolio: {
     title: "Our Work",
-    subtitle:
-      "Discover our latest projects and see how we bring ideas to life through innovative design and technology. Each project represents our commitment to excellence and creative problem-solving.",
     keyFeatures: "Key Features:",
     viewProject: "View Project Site",
     statsProjects: "Projects Completed",
@@ -98,9 +95,9 @@ const en = {
     statsSuccess: "Success Rate",
     statsTech: "Technologies",
     // Project descriptions
-    realsynchDesc:
-      "A comprehensive business intelligence platform that transforms how real estate professionals manage and grow their business. Realsynch consolidates data from 30+ real estate systems into actionable insights, helping agents track performance, identify opportunities, and make data-driven decisions. The platform delivers real-time dashboards, automated reporting, and predictive analytics to drive revenue growth.",
-    realsynchCategory: "Business Intelligence",
+    crealidadDesc:
+      "A transformative digital wellness platform dedicated to healing through sound and breathing. Crealidad connects users with immersive therapeutic experiences that combine sound frequencies, guided breathing sessions, and mindfulness practices. The platform empowers individuals to achieve deep relaxation, stress relief, and personal transformation through an accessible and beautifully designed interface.",
+    crealidadCategory: "Wellness Platform",
     omniaDesc:
       "A comprehensive event and coworking space management platform that simplifies operations and enhances member experience. The application streamlines booking systems, automates member management, and coordinates events seamlessly. It enables space owners to maximize utilization, reduce administrative overhead, and create engaging experiences for their community.",
     omniaCategory: "Platform",
@@ -116,12 +113,10 @@ const en = {
   // Testimonials
   testimonials: {
     title: "What Our Clients Say",
-    subtitle:
-      "Don't just take our word for it. Here's what our clients have to say about their experience working with Digital Crafters.",
     roleAt: "at",
     // Testimonial content
-    realsynchContent:
-      "Digital Crafters built a comprehensive intelligence platform that consolidates data from 30+ real estate systems. Our revenue has increased significantly since implementing their real-time analytics and automated reporting features.",
+    crealidadContent:
+      "Digital Crafters translated our wellness vision into a beautiful, immersive platform. Our community has grown exponentially since launch and users consistently praise the seamless experience and stunning interface they built for us.",
     omniaContent:
       "Digital Crafters created a booking and event management platform that reduced our administrative overhead by 60% and increased member satisfaction. Our space utilization has improved dramatically with their intuitive interface.",
     lightmindContent:
@@ -172,6 +167,12 @@ const en = {
     validationField: "Field must be at least 2 characters",
     validationDescription: "Description must be at least 10 characters",
     validationCaptcha: "Please verify you are not a robot",
+    featureFast: "Fast turnaround",
+    featureTailored: "Tailored solutions",
+    featureSatisfaction: "100% satisfaction",
+    availability: "Available for new projects",
+    formTitle: "Send us a message",
+    formSubtitle: "We'll get back to you within 24 hours.",
   },
 } as const;
 

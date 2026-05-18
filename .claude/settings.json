@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Luis Jimenez\\\\repos\\\\digital-crafters\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "WebFetch(domain:ser-crealidad.com)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

@@ -7,7 +7,6 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
-import Technologies from "@/components/Technologies";
 import Contact from "@/components/Contact";
 
 function Home() {
@@ -21,7 +20,6 @@ function Home() {
       <Services />
       <Portfolio containerRef={containerRef} />
       <Testimonials />
-      <Technologies />
       <Contact />
     </>
   );

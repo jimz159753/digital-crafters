@@ -8,45 +8,53 @@ export default function Technologies() {
   const { t } = useI18n();
 
   return (
-    <div id="technologies" className="bg-black text-white py-20">
-      <div className="max-w-7xl mx-auto px-8">
+    <div id="technologies" className="bg-[#0c0c0c] text-white py-24 relative overflow-hidden">
+      {/* Background texture */}
+      <div className="absolute inset-0 [background-image:radial-gradient(circle,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+      <div className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:64px_64px] pointer-events-none" />
+      <div className="absolute top-0 right-1/3 w-[500px] h-[300px] bg-teal-500/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
+
+        {/* Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-white/30 mb-5">
+            {t.nav.technologies}
+          </span>
+          <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight">
             {t.technologies.title}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {t.technologies.subtitle}
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {technologies.map((tech, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center group cursor-pointer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flex flex-col items-center group cursor-default"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.1 }}
             >
-              <div className="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-2xl group-hover:bg-gray-700 transition-colors duration-300 mb-4">
+              <div className="w-full aspect-square flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl group-hover:bg-white/[0.07] group-hover:border-white/[0.12] transition-all duration-300 mb-3">
                 <tech.icon
-                  className={`text-4xl ${tech.color} group-hover:scale-110 transition-transform duration-300`}
+                  className={`text-3xl ${tech.color} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
                 />
               </div>
-              <h3 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors duration-300">
+              <span className="text-xs font-medium text-white/30 group-hover:text-white/70 transition-colors duration-300 text-center">
                 {tech.name}
-              </h3>
+              </span>
             </motion.div>
           ))}
         </div>
+
       </div>
     </div>
   );
