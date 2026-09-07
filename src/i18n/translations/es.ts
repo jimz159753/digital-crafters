@@ -83,6 +83,13 @@ const es: TranslationKeys = {
     mobileDevF2: "Rendimiento nativo",
     mobileDevF3: "Notificaciones push",
     mobileDevF4: "Arquitectura offline-first",
+    videoEditing: "Edición de Video & Motion Graphics",
+    videoEditingDesc:
+      "Contenido de video pulido y motion graphics llamativos que dan vida a tu marca. Desde videos promocionales hasta explicativos animados, creamos visuales que enganchan y convierten.",
+    videoEditingF1: "Edición de video profesional",
+    videoEditingF2: "Motion graphics a medida",
+    videoEditingF3: "Contenido para redes sociales",
+    videoEditingF4: "Corrección de color y diseño de sonido",
     ctaQuestion: "¿No sabes qué servicio se adapta a tus necesidades?",
     ctaButton: "Hablemos",
   },

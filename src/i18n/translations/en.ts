@@ -81,6 +81,13 @@ const en = {
     mobileDevF2: "Native performance",
     mobileDevF3: "Push notifications",
     mobileDevF4: "Offline-first architecture",
+    videoEditing: "Video Editing & Motion Graphics",
+    videoEditingDesc:
+      "Polished video content and eye-catching motion graphics that bring your brand to life. From promotional videos to animated explainers, we craft visuals that engage and convert.",
+    videoEditingF1: "Professional video editing",
+    videoEditingF2: "Custom motion graphics",
+    videoEditingF3: "Social media content",
+    videoEditingF4: "Color grading & sound design",
     ctaQuestion: "Not sure which service fits your needs?",
     ctaButton: "Let's Talk",
   },

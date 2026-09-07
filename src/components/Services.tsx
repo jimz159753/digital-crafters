@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FaBullhorn, FaCode, FaMobileAlt, FaShoppingCart, FaGlobe } from "react-icons/fa";
+import { FaBullhorn, FaCode, FaMobileAlt, FaShoppingCart, FaGlobe, FaVideo } from "react-icons/fa";
 import { useI18n } from "@/i18n";
 
 export default function Services() {
@@ -49,6 +49,14 @@ export default function Services() {
       features: [t.services.mobileDevF1, t.services.mobileDevF2, t.services.mobileDevF3, t.services.mobileDevF4],
       accentText: "text-rose-400",
       accentBg: "bg-rose-500",
+    },
+    {
+      icon: FaVideo,
+      title: t.services.videoEditing,
+      description: t.services.videoEditingDesc,
+      features: [t.services.videoEditingF1, t.services.videoEditingF2, t.services.videoEditingF3, t.services.videoEditingF4],
+      accentText: "text-cyan-400",
+      accentBg: "bg-cyan-500",
     },
   ];
 
